@@ -10,8 +10,6 @@ export const getAllUser = async () => {
         console.table(res);
         console.groupEnd();
 
-        localStorage.setItem("currentUser", JSON.stringify(res));
-
         return res;
     } catch (error) {
         console.error(error);
