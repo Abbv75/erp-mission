@@ -1,19 +1,27 @@
-import { faPaperPlane, faPlus, faTimes, faTimesCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Avatar, Button, Card, DialogActions, FormControl, FormLabel, Input, Modal, ModalClose, ModalDialog, Stack, Typography } from '@mui/joy'
-import React, { useEffect, useState } from 'react'
+import { Avatar, Button, Stack, Typography } from '@mui/joy'
+import React, { useCallback, useEffect, useState } from 'react'
 import CustomTable from '../../components/CustomTable'
 import { getAllUser } from '../../functions/getAllUser'
-import { Dialog } from '@mui/material'
+import EditionForm from './EditionForm'
 
 const UserListe = () => {
     const [data, setdata] = useState([]);
     const [isFormOpened, setisFormOpened] = useState(true);
 
-    useEffect(
+    const loadUser = useCallback(
         () => {
             getAllUser().then(res => res && setdata(res))
-        }
+        },
+        []
+    );
+
+    useEffect(
+        () => {
+            loadUser()
+        },
+        []
     )
 
     return (
@@ -50,69 +58,11 @@ const UserListe = () => {
                 ])}
             />
 
-            <Modal
-                open={isFormOpened}
-                onClose={() => setisFormOpened(false)}
-                slotProps={{
-                    root: {
-                        sx: {
-                            display: "flex",
-                            flex: 1,
-                            alignItems: "center",
-                            justifyContent: "center"
-                        }
-                    }
-                }}
-            >
-                <form>
-                    <Card>
-                        <Typography>Ajout d'utilisateur</Typography>
-                        <FormControl>
-                            <FormLabel>Nom</FormLabel>
-                            <Input placeholder='Saisissez le nom' />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel>Prenom</FormLabel>
-                            <Input placeholder='Saisissez le prenom' />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel>Numero</FormLabel>
-                            <Input placeholder='Saisissez le numero' />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel>Login</FormLabel>
-                            <Input placeholder='Saisissez le login' />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel>Mot de passe</FormLabel>
-                            <Input placeholder='Saisissez le mot de passe' />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel>Confirmez le mot de passe</FormLabel>
-                            <Input placeholder='Confirmez le mot de passe' />
-                        </FormControl>
-                        <Stack
-                            gap={1}
-                            direction={"row"}
-                        >
-                            <Button
-                                color='danger'
-                                variant='outlined'
-                                startDecorator={
-                                    <FontAwesomeIcon icon={faTimesCircle} />
-                                }
-                            >Annuler</Button>
-                            <Button
-                                fullWidth
-                                endDecorator={
-                                    <FontAwesomeIcon icon={faPaperPlane} />
-                                }
-                                type='submit'
-                            >Valider</Button>
-                        </Stack>
-                    </Card>
-                </form>
-            </Modal>
+            <EditionForm
+                setisFormOpened={setisFormOpened}
+                isFormOpened={isFormOpened}
+                loadUser={loadUser}
+            />
         </Stack>
     )
 }
