@@ -6,12 +6,29 @@ import '@fontsource/inter';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './components/Router';
 import { ToastContainer } from 'react-toastify';
+import Navbar from './components/Navbar';
+import { useState } from 'react';
+import Header from './components/Header';
 
 function App() {
+  const [isNavbarOpened, setisNavbarOpened] = useState(true);
+
   return (
     <BrowserRouter>
+
+      <Navbar
+        isNavbarOpened={isNavbarOpened}
+        setisNavbarOpened={setisNavbarOpened}
+      />
+
+      <Header
+        setisNavbarOpened={setisNavbarOpened}
+      />
+
       <Router />
+
       <ToastContainer />
+
     </BrowserRouter>
   );
 }
