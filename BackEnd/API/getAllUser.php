@@ -6,8 +6,7 @@ require "../classes/Response.php";
 $response = new Response(null, 200, []);
 
 try {
-    $query = $bdd->prepare('SELECT * FROM utilisateur');
-    $query->execute([$login, $password]);
+    $query = $bdd->query('SELECT * FROM utilisateur, role WHERE utilisateur.id_role=role.idRole');
 
     if (!$res = $query->fetchAll(PDO::FETCH_ASSOC)) {
         $response->satutCode404();

@@ -71,6 +71,7 @@ const Connexion = () => {
                         placeholder='mot de passe'
                         value={password}
                         onChange={({ target }) => setpassword(target.value)}
+                        type='password'
                         required
                     />
                     <Button

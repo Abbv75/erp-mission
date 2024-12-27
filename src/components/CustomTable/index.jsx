@@ -16,7 +16,7 @@ const CustomTable = ({
                 >
                     <TableRow
                         sx={{
-                            ">*": {
+                            "&>*": {
                                 color: "white",
                                 fontWeight: 700
                             }
@@ -32,11 +32,17 @@ const CustomTable = ({
                 </TableHead>
 
                 <TableBody>
-                    <TableRow>
-                        {
-                            data.map(value => (<TableCell>{value}</TableCell>))
-                        }
-                    </TableRow>
+                    {
+                        data.map((currentRow, indexTmp) => (
+                            <TableRow key={indexTmp}>
+                                {
+                                    currentRow.map((value, index) => (
+                                        <TableCell key={index}>{value}</TableCell>
+                                    ))
+                                }
+                            </TableRow>
+                        ))
+                    }
                 </TableBody>
             </Table>
         </TableContainer>
