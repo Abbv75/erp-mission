@@ -5,11 +5,13 @@ import '@fontsource/roboto/700.css';
 import '@fontsource/inter';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './components/Router';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <BrowserRouter>
       <Router />
+      <ToastContainer />
     </BrowserRouter>
   );
 }
