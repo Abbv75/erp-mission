@@ -9,9 +9,10 @@ import { ToastContainer } from 'react-toastify';
 import Navbar from './components/Navbar';
 import { useState } from 'react';
 import Header from './components/Header';
+import { Container } from '@mui/joy';
 
 function App() {
-  const [isNavbarOpened, setisNavbarOpened] = useState(true);
+  const [isNavbarOpened, setisNavbarOpened] = useState(false);
 
   return (
     <BrowserRouter>
@@ -25,7 +26,13 @@ function App() {
         setisNavbarOpened={setisNavbarOpened}
       />
 
-      <Router />
+      <Container
+        sx={{
+          pt: 2
+        }}
+      >
+        <Router />
+      </Container>
 
       <ToastContainer />
 

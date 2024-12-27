@@ -1,5 +1,5 @@
 import { Avatar, Button, Card, Input, Stack, Typography } from '@mui/joy'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock, faUserAstronaut } from '@fortawesome/free-solid-svg-icons'
 import { login as loginUser } from "../../functions/login"
@@ -30,6 +30,13 @@ const Connexion = () => {
             toast.error("Une eerrue est survenue");
         }
     }
+
+    useEffect(
+        () => {
+            !!localStorage.getItem("currentUser") && navigate("user-liste");
+        },
+        []
+    )
 
     return (
         <Stack

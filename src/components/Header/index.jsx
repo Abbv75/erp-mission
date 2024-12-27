@@ -5,7 +5,12 @@ import React from 'react'
 
 const Header = ({ setisNavbarOpened }) => {
     return (
-        <Card>
+        <Card
+            sx={{
+                p: 1,
+                borderRadius: 0
+            }}
+        >
             <Stack
                 direction={"row"}
                 justifyContent={"space-between"}
