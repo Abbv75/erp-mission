@@ -12,7 +12,7 @@ try {
 
     extract($_POST);
 
-    $query = $bdd->prepare('DELETE FROM utilisateur WHERE id_utilisateur');
+    $query = $bdd->prepare('DELETE FROM utilisateur WHERE id_utilisateur=?');
 
     if (!$query->execute([$id_utilisateur])) {
         $response->satutCode404();

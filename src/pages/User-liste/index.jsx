@@ -1,10 +1,12 @@
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faTrash, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
 import CustomTable from '../../components/CustomTable'
 import { getAllUser } from '../../functions/getAllUser'
 import EditionForm from './EditionForm'
+import { deleteUser } from '../../functions/deleteUser'
+import { toast } from 'react-toastify'
 
 const UserListe = () => {
     const [data, setdata] = useState([]);
@@ -22,7 +24,24 @@ const UserListe = () => {
             loadUser()
         },
         []
-    )
+    );
+
+    const handleDelete = (id) => {
+        if (
+            window.confirm("Etes vous sur de vouloir supprimer?")
+        ) {
+            deleteUser(id).then(
+                () => {
+                    toast.success("Suppression reussit");
+                    loadUser();
+                }
+            ).catch(
+                () => {
+                    toast.error("Suppression echouer");
+                }
+            )
+        }
+    }
 
     return (
         <Stack
@@ -47,7 +66,7 @@ const UserListe = () => {
             </Stack>
 
             <CustomTable
-                headerList={['id', 'Nom', "Prenom", "Login", "Role", "Telephone"]}
+                headerList={['id', 'Nom', "Prenom", "Login", "Role", "Telephone", 'action']}
                 data={data.map(value => [
                     value?.id_utilisateur,
                     value?.nom_utilisateur,
@@ -55,6 +74,16 @@ const UserListe = () => {
                     value?.login,
                     value?.nomRole,
                     value?.telephone,
+                    <Stack>
+                        <FontAwesomeIcon
+                            icon={faTrashArrowUp}
+                            color='red'
+                            onClick={() => handleDelete(value?.id_utilisateur)}
+                            style={{
+                                cursor: "pointer"
+                            }}
+                        />
+                    </Stack>
                 ])}
             />
 
