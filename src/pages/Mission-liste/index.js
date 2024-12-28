@@ -54,6 +54,7 @@ const MissionListe = () => {
 
             <Stack
                 direction={"row"}
+                flexWrap={"wrap"}
                 gap={2}
             >
                 {
