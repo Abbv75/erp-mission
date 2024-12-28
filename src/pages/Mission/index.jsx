@@ -3,6 +3,7 @@ import React from 'react'
 import InfoZone from './InfoZone'
 import ParticipantZone from './ParticipantZone'
 import { useParams } from 'react-router-dom'
+import VehiculeZone from './VehiculeZone'
 
 const Mission = () => {
     const { id_mission } = useParams();
@@ -18,6 +19,8 @@ const Mission = () => {
             <ParticipantZone
                 id_mission={id_mission}
             />
+
+            <VehiculeZone />
         </Stack>
     )
 }
