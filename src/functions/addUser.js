@@ -9,7 +9,7 @@ export const addUser = async (
     telephone = undefined,
 ) => {
     try {
-        const res = await axios.postForm(
+        await axios.postForm(
             `${process.env.REACT_APP_API_URL}/addUser.php`,
             {
                 nom,

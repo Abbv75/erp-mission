@@ -1,4 +1,4 @@
-import { faPlus, faTrash, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faFeatherAlt, faPlus, faTrash, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -11,6 +11,8 @@ import { toast } from 'react-toastify'
 const UserListe = () => {
     const [data, setdata] = useState([]);
     const [isFormOpened, setisFormOpened] = useState(false);
+    const [currentValue, setcurrentValue] = useState(null);
+
 
     const loadUser = useCallback(
         () => {
@@ -41,6 +43,11 @@ const UserListe = () => {
                 }
             )
         }
+    }
+
+    const handleEdite = (value) => {
+        setcurrentValue(value);
+        setisFormOpened(true);
     }
 
     return (
@@ -74,14 +81,22 @@ const UserListe = () => {
                     value?.login,
                     value?.nomRole,
                     value?.telephone,
-                    <Stack>
+                    <Stack
+                        direction={"row"}
+                        gap={1}
+                        sx={{ cursor: "pointer" }}
+                    >
+                        <FontAwesomeIcon
+                            icon={faFeatherAlt}
+                            color='green'
+                            onClick={() => handleEdite(value)}
+                            title='Modifier'
+                        />
                         <FontAwesomeIcon
                             icon={faTrashArrowUp}
                             color='red'
                             onClick={() => handleDelete(value?.id_utilisateur)}
-                            style={{
-                                cursor: "pointer"
-                            }}
+                            title='supprimer'
                         />
                     </Stack>
                 ])}
@@ -91,6 +106,7 @@ const UserListe = () => {
                 setisFormOpened={setisFormOpened}
                 isFormOpened={isFormOpened}
                 loadUser={loadUser}
+                currentValue={currentValue}
             />
         </Stack>
     )

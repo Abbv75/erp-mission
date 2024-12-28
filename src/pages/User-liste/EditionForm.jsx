@@ -1,12 +1,13 @@
 import { faPaperPlane, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Card, FormControl, FormLabel, Input, Modal, Stack, Typography } from '@mui/joy'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { addUser } from '../../functions/addUser'
 
-const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser }) => {
+const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentValue }) => {
     const [data, setdata] = useState({
+        id_utilisateur: undefined,
         nom: undefined,
         prenom: undefined,
         login: undefined,
@@ -56,6 +57,24 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser }) => {
             }
         )
     }
+
+    useEffect(
+        () => {
+            if (currentValue) {
+                setdata({
+                    id_utilisateur: currentValue?.id_utilisateur,
+                    nom: currentValue.nom_utilisateur,
+                    prenom: currentValue?.prenom_utilisateur,
+                    login: currentValue.login,
+                    password: currentValue.password,
+                    passwordConfirmation: currentValue.password,
+                    telephone: currentValue?.telephone,
+                    idRole: currentValue.idRole,
+                })
+            }
+        },
+        [currentValue]
+    )
 
     return (
         <Modal
@@ -142,6 +161,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser }) => {
                                 ...data,
                                 passwordConfirmation: target.value
                             })}
+                            type='password'
                         />
                     </FormControl>
 
