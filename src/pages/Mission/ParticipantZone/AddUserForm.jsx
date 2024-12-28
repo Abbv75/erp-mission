@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Card, FormControl, FormLabel, Modal, Option, Select, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
 import { getAllUser } from '../../../functions/getAllUser'
+import { addMissionParticipant } from '../../../functions/addMissionParticipant'
+import { toast } from 'react-toastify'
 
-const AddUserForm = ({ isFormOpened = false, setisFormOpened }) => {
+const AddUserForm = ({ isFormOpened = false, setisFormOpened, id_mission, loadParticipant }) => {
     const [idUser, setidUser] = useState(null);
     const [userListe, setuserListe] = useState([])
 
@@ -22,6 +24,25 @@ const AddUserForm = ({ isFormOpened = false, setisFormOpened }) => {
         []
     );
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        addMissionParticipant(idUser, id_mission).then(
+            () => {
+                toast.success("Utilisateur ajouter avec succes");
+                loadParticipant && loadParticipant();
+            }
+        ).catch(
+            () => {
+                toast.error("Utilisateur non ajouter");
+            }
+        ).finally(
+            () => {
+                setisFormOpened(false);
+            }
+        )
+    }
+
     return (
         <Modal
             open={isFormOpened}
@@ -38,7 +59,7 @@ const AddUserForm = ({ isFormOpened = false, setisFormOpened }) => {
             }}
         >
             <form
-            // onSubmit={haandleSubmit}
+                onSubmit={handleSubmit}
             >
                 <Card>
                     <Typography>Ajouter un utilisateur a la mission</Typography>

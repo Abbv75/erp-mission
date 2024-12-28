@@ -70,6 +70,8 @@ const ParticipantZone = () => {
             <AddUserForm
                 isFormOpened={isFormOpened}
                 setisFormOpened={setisFormOpened}
+                id_mission={id_mission}
+                loadParticipant={loadParticipant}
             />
         </Stack>
     )
