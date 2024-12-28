@@ -2,8 +2,27 @@ import { faFeatherAlt, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, ButtonGroup, Card, Divider, Stack, Typography } from '@mui/joy'
 import React from 'react'
+import { toast } from 'react-toastify'
+import { deleteMission } from '../../functions/deleteMission'
 
-const MissionItem = ({ data }) => {
+const MissionItem = ({ data, loadMission }) => {
+    const handleDelete = (id) => {
+        if (
+            window.confirm("Etes vous sur de vouloir supprimer?")
+        ) {
+            deleteMission(id).then(
+                () => {
+                    toast.success("Suppression reussit");
+                    loadMission && loadMission();
+                }
+            ).catch(
+                () => {
+                    toast.error("Suppression echouer");
+                }
+            )
+        }
+    }
+
     return (
         <Card
             sx={{
@@ -60,6 +79,7 @@ const MissionItem = ({ data }) => {
                     startDecorator={
                         <FontAwesomeIcon icon={faTrashArrowUp} />
                     }
+                    onClick={() => handleDelete(data.id_mission)}
                 >Supprimer</Button>
                 <Button
                     fullWidth

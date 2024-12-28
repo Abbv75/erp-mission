@@ -4,9 +4,12 @@ import { Avatar, Button, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
 import MissionItem from './MissionItem'
 import { getAllMission } from '../../functions/getAllMission'
+import EditionForm from './EditionForm'
 
 const MissionListe = () => {
     const [data, setdata] = useState([]);
+    const [isFormOpened, setisFormOpened] = useState(false);
+    const [currentValue, setcurrentValue] = useState(null);
 
     const loadMission = useCallback(
         () => {
@@ -23,8 +26,8 @@ const MissionListe = () => {
     );
 
     const handleAdd = () => {
-        // setcurrentValue(null);
-        // setisFormOpened(true);
+        setcurrentValue(null);
+        setisFormOpened(true);
     }
 
     return (
@@ -58,10 +61,18 @@ const MissionListe = () => {
                         <MissionItem
                             key={index}
                             data={value}
+                            loadMission={loadMission}
                         />
                     ))
                 }
             </Stack>
+
+            <EditionForm
+                setisFormOpened={setisFormOpened}
+                isFormOpened={isFormOpened}
+                loadMission={loadMission}
+                currentValue={currentValue}
+            />
         </Stack>
     )
 }
