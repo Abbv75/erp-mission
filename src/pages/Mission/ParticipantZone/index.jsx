@@ -3,21 +3,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
 import UserCard from './UserCard'
-import { getAllUser } from '../../../functions/getAllUser'
+import { getAllMissionParticipant } from '../../../functions/getAllMissionParticipant'
+import { useParams } from 'react-router-dom'
 
 const ParticipantZone = () => {
+    const { id_mission } = useParams();
     const [participantListe, setparticipantListe] = useState([]);
 
-    const loadUser = useCallback(
+    const loadParticipant = useCallback(
         () => {
-            getAllUser().then(res => res && setparticipantListe(res));
+            getAllMissionParticipant(id_mission).then(res => res && setparticipantListe(res));
         },
         []
     );
 
     useEffect(
         () => {
-            loadUser();
+            loadParticipant();
         },
         []
     );
@@ -50,7 +52,7 @@ const ParticipantZone = () => {
             >
                 {
                     participantListe.map(value => (
-                        <UserCard 
+                        <UserCard
                             data={value}
                         />
                     ))

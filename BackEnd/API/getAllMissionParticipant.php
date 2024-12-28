@@ -14,15 +14,14 @@ try {
 
     extract($_GET);
 
-    if (!$query->fetch()) {
-        $response->satutCode404("vehicule introuvable");
-    }
-
-    $query = $bdd->query('SELECT * 
-        FROM missionParticipant, utilisateur 
+    $query = $bdd->prepare('SELECT * 
+        FROM missionParticipant, utilisateur , role
         WHERE missionParticipant.id_mission = ?
             AND missionParticipant.id_participant = utilisateur.id_utilisateur
+            AND utilisateur.id_role = role.idRole
     ');
+
+    $query->execute([$id]);
 
     if (!$res = $query->fetchAll(PDO::FETCH_ASSOC)) {
         $response->satutCode404();
