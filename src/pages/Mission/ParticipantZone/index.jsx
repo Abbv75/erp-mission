@@ -7,8 +7,7 @@ import { getAllMissionParticipant } from '../../../functions/getAllMissionPartic
 import { useParams } from 'react-router-dom'
 import AddUserForm from './AddUserForm'
 
-const ParticipantZone = () => {
-    const { id_mission } = useParams();
+const ParticipantZone = ({id_mission}) => {
     const [participantListe, setparticipantListe] = useState([]);
     const [isFormOpened, setisFormOpened] = useState(false);
 

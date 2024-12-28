@@ -3,10 +3,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Card, Stack, Typography } from '@mui/joy'
 import { Collapse } from '@mui/material'
 import { blue } from '@mui/material/colors'
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { getMission } from '../../functions/getMission'
 
-const InfoZone = () => {
+const InfoZone = ({ id_mission }) => {
     const [isOpen, setisOpen] = useState(true);
+    const [missionData, setmissionData] = useState({});
+
+    const loadMission = useCallback(
+        () => {
+            getMission(id_mission).then(res => res && setmissionData(res));
+        },
+        []
+    );
+
+    useEffect(
+        () => {
+            loadMission();
+        },
+        []
+    );
 
     return (
         <Stack direction={"row"} gap={2}>
@@ -18,7 +34,7 @@ const InfoZone = () => {
                 <FontAwesomeIcon size='2x' icon={faInfoCircle} />
             </Button>
 
-            <Collapse in={isOpen} orientation='horizontal' unmountOnExit>
+            <Collapse in={isOpen && !!missionData} orientation='horizontal' unmountOnExit>
                 <Card
                     color='primary'
                     variant='soft'
@@ -27,7 +43,7 @@ const InfoZone = () => {
                     }}
                 >
                     <Typography color='primary' >
-                        Cette se trouve à 500 KM de Bamako. Elle commence le 18-45-87441 et prendra fin le 551/521/1
+                        Cette se trouve à {missionData?.kilometrage?.toLocaleString()} KM de Bamako. Elle commence le {missionData?.date_depart} et prendra fin le {missionData?.date_arrivee}
                     </Typography>
                 </Card>
             </Collapse>

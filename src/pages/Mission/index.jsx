@@ -2,15 +2,22 @@ import { Stack } from '@mui/joy'
 import React from 'react'
 import InfoZone from './InfoZone'
 import ParticipantZone from './ParticipantZone'
+import { useParams } from 'react-router-dom'
 
 const Mission = () => {
+    const { id_mission } = useParams();
+
     return (
         <Stack
             gap={2}
         >
-            <InfoZone />
+            <InfoZone
+                id_mission={id_mission}
+            />
 
-            <ParticipantZone />
+            <ParticipantZone
+                id_mission={id_mission}
+            />
         </Stack>
     )
 }
