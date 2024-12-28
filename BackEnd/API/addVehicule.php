@@ -28,7 +28,7 @@ try {
         matricule, 
         date_achat, 
         type, 
-        marque, 
+        marque
     ) VALUES (?,?,?,?) ');
 
     if (!$query->execute([
@@ -42,5 +42,5 @@ try {
 
     $response->satutCode200();
 } catch (\Throwable $th) {
-    $response->satutCode500();
+    $response->satutCode500($th->getMessage());
 }

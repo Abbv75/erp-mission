@@ -3,16 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Card, FormControl, FormLabel, Input, Modal, Option, Select, Stack, Typography } from '@mui/joy'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { addUser } from '../../functions/addUser'
 import { editeUser } from '../../functions/editeUser'
+import { addVehicule } from '../../functions/addVehicule'
 
 const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, currentValue = null, roleList = [] }) => {
     const [data, setdata] = useState({
         id_voiture: undefined,
         date_achat: undefined,
         matricule: undefined,
-        type: 1,
-        marque: 1,
+        type: "Voiture",
+        marque: "Toyota",
     });
 
     const haandleSubmit = (e) => {
@@ -26,12 +26,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
             id_voiture
         } = data;
 
-        if (password != passwordConfirmation) {
-            toast.error("Les mot de passe ne sont pas les memes");
-            return false;
-        }
-
-        if (!!id_utilisateur) {
+        if (!!id_voiture) {
             editeUser(
                 id_utilisateur,
                 nom,
@@ -56,21 +51,19 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
             )
         }
         else {
-            addUser(
-                nom,
-                login,
-                password,
-                idRole || 1,
-                prenom,
-                telephone
+            addVehicule(
+                matricule,
+                date_achat,
+                type,
+                marque,
             ).then(
                 () => {
-                    toast.success("Utilisateur ajouter avec succes");
+                    toast.success("voiture ajouter avec succes");
                     loadVehicule && loadVehicule();
                 }
             ).catch(
                 () => {
-                    toast.error("Utilisateur non ajouter");
+                    toast.error("voiture non ajouter");
                 }
             ).finally(
                 () => {
@@ -85,14 +78,11 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
         () => {
             if (!!currentValue) {
                 setdata({
-                    id_utilisateur: currentValue?.id_utilisateur,
-                    nom: currentValue.nom_utilisateur,
-                    prenom: currentValue?.prenom_utilisateur,
-                    login: currentValue.login,
-                    password: currentValue.password,
-                    passwordConfirmation: currentValue.password,
-                    telephone: currentValue?.telephone,
-                    idRole: currentValue.idRole,
+                    matricule: currentValue?.matricule,
+                    date_achat: currentValue.date_achat,
+                    type: currentValue?.type,
+                    marque: currentValue.marque,
+                    id_voiture: currentValue.id_voiture,
                 })
             }
             else {
@@ -100,8 +90,8 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
                     id_voiture: undefined,
                     date_achat: undefined,
                     matricule: undefined,
-                    type: 1,
-                    marque: 1,
+                    type: "Voiture",
+                    marque: "Toyota",
                 })
             }
         },
@@ -172,7 +162,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
                     <FormControl required>
                         <FormLabel>Marque</FormLabel>
                         <Select
-                            value={data.type || "Toyota"}
+                            value={data.marque || "Toyota"}
                             onChange={(e, value) => setdata({
                                 ...data,
                                 marque: value
@@ -199,7 +189,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
                             type='reset'
                             onClick={() => setisFormOpened(false)}
                         >Annuler</Button>
-                        
+
                         <Button
                             fullWidth
                             endDecorator={
