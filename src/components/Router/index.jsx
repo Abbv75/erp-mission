@@ -16,7 +16,7 @@ const Router = () => {
             <Route
                 path='/*'
                 element={
-                    !!localStorage.getItem("currentItem")
+                    !!currentUser
                         ? <UserListe />
                         : <Connexion setcurrentUser={setcurrentUser} />
                 }

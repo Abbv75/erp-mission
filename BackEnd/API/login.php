@@ -12,7 +12,7 @@ try {
 
     extract($_POST);
 
-    $query = $bdd->prepare('SELECT * FROM utilisateur, role WHERE login=? AND password=?');
+    $query = $bdd->prepare('SELECT * FROM utilisateur, role WHERE login=? AND password=? AND utilisateur.id_role = role.idRole');
     $query->execute([$login, $password]);
 
     if (!$res = $query->fetch(PDO::FETCH_ASSOC)) {

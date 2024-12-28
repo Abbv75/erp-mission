@@ -15,7 +15,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
         password: undefined,
         passwordConfirmation: undefined,
         telephone: undefined,
-        idRole: roleList[0]?.idRole || 1,
+        idRole: 1,
     });
 
     const haandleSubmit = (e) => {
@@ -43,7 +43,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
                 nom,
                 login,
                 password,
-                idRole || 1,
+                idRole,
                 prenom,
                 telephone
             ).then(
@@ -66,7 +66,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
                 nom,
                 login,
                 password,
-                idRole || 1,
+                idRole,
                 prenom,
                 telephone
             ).then(
@@ -184,7 +184,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
                     <FormControl required>
                         <FormLabel>Role</FormLabel>
                         <Select
-                            value={data.idRole || 1}
+                            value={data.idRole}
                             onChange={(e, value) => setdata({
                                 ...data,
                                 idRole: value
@@ -193,7 +193,6 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
                             {
                                 roleList.map(value => (
                                     <Option value={value.idRole}>{value.nomRole}</Option>
-
                                 ))
                             }
                         </Select>

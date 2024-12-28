@@ -57,33 +57,57 @@ const Navbar = ({
                 )
             }
 
-            <Button
-                variant='soft'
-                startDecorator={
-                    <Avatar variant='solid'>
-                        <FontAwesomeIcon icon={faCarAlt} />
-                    </Avatar>
-                }
-                size='lg'
-                component={"a"}
-                href='/voiture-liste'
-            >
-                <Typography width={"100%"} textAlign={"left"}>Gestion des voitures de mission</Typography>
-            </Button>
+            {
+                currentUser?.nomRole == 'gestionnaire' && (
+                    <>
+                        <Button
+                            variant='soft'
+                            startDecorator={
+                                <Avatar variant='solid'>
+                                    <FontAwesomeIcon icon={faCarAlt} />
+                                </Avatar>
+                            }
+                            size='lg'
+                            component={"a"}
+                            href='/voiture-liste'
+                        >
+                            <Typography width={"100%"} textAlign={"left"}>Gestion des voitures de mission</Typography>
+                        </Button>
 
-            <Button
-                variant='soft'
-                startDecorator={
-                    <Avatar variant='solid'>
-                        <FontAwesomeIcon icon={faStackOverflow} />
-                    </Avatar>
-                }
-                size='lg'
-                component={"a"}
-                href='/mission-liste'
-            >
-                <Typography width={"100%"} textAlign={"left"}>Gestion des missions</Typography>
-            </Button>
+                        <Button
+                            variant='soft'
+                            startDecorator={
+                                <Avatar variant='solid'>
+                                    <FontAwesomeIcon icon={faStackOverflow} />
+                                </Avatar>
+                            }
+                            size='lg'
+                            component={"a"}
+                            href='/mission-liste'
+                        >
+                            <Typography width={"100%"} textAlign={"left"}>Gestion des missions</Typography>
+                        </Button>
+                    </>
+                )
+            }
+
+            {
+                currentUser?.nomRole == 'chauffeur' && (
+                    <Button
+                        variant='soft'
+                        startDecorator={
+                            <Avatar variant='solid'>
+                                <FontAwesomeIcon icon={faUserAstronaut} />
+                            </Avatar>
+                        }
+                        size='lg'
+                        component={"a"}
+                        href='/demande-reparation'
+                    >
+                        <Typography textAlign={"left"} width={"100%"}>Demande de reparation</Typography>
+                    </Button>
+                )
+            }
         </Drawer>
     )
 }
