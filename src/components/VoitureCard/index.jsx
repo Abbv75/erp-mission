@@ -2,26 +2,26 @@ import { faTimesCircle, faTruck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Card, Stack, Typography } from '@mui/joy'
 import React from 'react'
-import { deleteMissionParticipant } from '../../functions/deleteMissionParticipant'
 import { toast } from 'react-toastify'
+import { deleteMissionVehicule } from '../../functions/deleteMissionVehicule'
 
-const VoitureCard = ({ data, loadParticipant, id_mission }) => {
+const VoitureCard = ({ data, loadVehicule, id_mission }) => {
 
     const handleDelete = () => {
-        // if (
-        //     window.confirm("Etes vous sur de vouloir supprimer?")
-        // ) {
-        //     deleteMissionParticipant(data.id_utilisateur, id_mission).then(
-        //         () => {
-        //             toast.success("Suppression reussit");
-        //             loadParticipant && loadParticipant();
-        //         }
-        //     ).catch(
-        //         () => {
-        //             toast.error("Suppression echouer");
-        //         }
-        //     )
-        // }
+        if (
+            window.confirm("Etes vous sur de vouloir supprimer?")
+        ) {
+            deleteMissionVehicule(data.id_vehicule, id_mission).then(
+                () => {
+                    toast.success("Suppression reussit");
+                    loadVehicule && loadVehicule();
+                }
+            ).catch(
+                () => {
+                    toast.error("Suppression echouer");
+                }
+            )
+        }
     }
 
     return (

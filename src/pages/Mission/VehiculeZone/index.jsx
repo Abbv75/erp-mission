@@ -2,9 +2,9 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
-import AddUserForm from './AddUserForm'
 import { getAllMissionVehicule } from '../../../functions/getAllMissionVehicule'
 import VoitureCard from '../../../components/VoitureCard'
+import AddVehiculeForm from './AddVehiculeForm'
 
 const VehiculeZone = ({ id_mission }) => {
     const [vehiculeListe, setvehiculeListe] = useState([]);
@@ -58,18 +58,18 @@ const VehiculeZone = ({ id_mission }) => {
                     vehiculeListe.map(value => (
                         <VoitureCard
                             data={value}
-                        // loadParticipant={loadParticipant}
-                        // id_mission={id_mission}
+                            loadVehicule={loadVehicule}
+                            id_mission={id_mission}
                         />
                     ))
                 }
             </Stack>
 
-            <AddUserForm
+            <AddVehiculeForm
                 isFormOpened={isFormOpened}
                 setisFormOpened={setisFormOpened}
                 id_mission={id_mission}
-            // loadParticipant={loadParticipant}
+                loadVehicule={loadVehicule}
             />
         </Stack>
     )

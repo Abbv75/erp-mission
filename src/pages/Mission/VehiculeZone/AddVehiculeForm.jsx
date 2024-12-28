@@ -1,18 +1,18 @@
-import { faPaperPlane, faTimesCircle, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faPaperPlane, faTimesCircle, faTruck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Card, FormControl, FormLabel, Modal, Option, Select, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
-import { getAllUser } from '../../../functions/getAllUser'
-import { addMissionParticipant } from '../../../functions/addMissionParticipant'
 import { toast } from 'react-toastify'
+import { addMissionVehicule } from '../../../functions/addMissionVehicule'
+import { getAllVehicule } from '../../../functions/getAllVehicule'
 
-const AddUserForm = ({ isFormOpened = false, setisFormOpened, id_mission, loadParticipant }) => {
-    const [idUser, setidUser] = useState(null);
-    const [userListe, setuserListe] = useState([])
+const AddVehiculeForm = ({ isFormOpened = false, setisFormOpened, id_mission, loadVehicule }) => {
+    const [id, setid] = useState(null);
+    const [vehiculeListe, setvehiculeListe] = useState([]);
 
     const loadUser = useCallback(
         () => {
-            getAllUser().then(res => res && setuserListe(res));
+            getAllVehicule().then(res => res && setvehiculeListe(res));
         },
         []
     );
@@ -27,14 +27,14 @@ const AddUserForm = ({ isFormOpened = false, setisFormOpened, id_mission, loadPa
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        addMissionParticipant(idUser, id_mission).then(
+        addMissionVehicule(id, id_mission).then(
             () => {
-                toast.success("Utilisateur ajouter avec succes");
-                loadParticipant && loadParticipant();
+                toast.success("Vehicule ajouter avec succes");
+                loadVehicule && loadVehicule();
             }
         ).catch(
             () => {
-                toast.error("Utilisateur non ajouter");
+                toast.error("Vehicule non ajouter");
             }
         ).finally(
             () => {
@@ -62,21 +62,21 @@ const AddUserForm = ({ isFormOpened = false, setisFormOpened, id_mission, loadPa
                 onSubmit={handleSubmit}
             >
                 <Card>
-                    <Typography>Ajouter un utilisateur a la mission</Typography>
+                    <Typography>Ajouter un vehicule a la mission</Typography>
 
                     <FormControl required>
-                        <FormLabel>Selectionnez l'utilisateur</FormLabel>
+                        <FormLabel>Selectionnez le vehicule</FormLabel>
                         <Select
-                            value={idUser}
-                            onChange={(e, value) => setidUser(value)}
+                            value={id}
+                            onChange={(e, value) => setid(value)}
                             startDecorator={
-                                <FontAwesomeIcon icon={faUser} />
+                                <FontAwesomeIcon icon={faTruck} />
                             }
                         >
                             <Option value={null}>Selectionnez</Option>
                             {
-                                userListe.map(value => (
-                                    <Option value={value.id_utilisateur}>{value.nom_utilisateur} {value.prenom_utilisateur}</Option>
+                                vehiculeListe.map(value => (
+                                    <Option value={value.id_vehicule}>{value.matricule} | {value.marque}</Option>
                                 ))
                             }
                         </Select>
@@ -101,7 +101,7 @@ const AddUserForm = ({ isFormOpened = false, setisFormOpened, id_mission, loadPa
                                 <FontAwesomeIcon icon={faPaperPlane} />
                             }
                             type='submit'
-                            disabled={!idUser}
+                            disabled={!id}
                         >Valider</Button>
                     </Stack>
                 </Card>
@@ -110,4 +110,4 @@ const AddUserForm = ({ isFormOpened = false, setisFormOpened, id_mission, loadPa
     )
 }
 
-export default AddUserForm
+export default AddVehiculeForm
