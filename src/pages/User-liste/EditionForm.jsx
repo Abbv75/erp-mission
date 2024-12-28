@@ -136,7 +136,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
                 onSubmit={haandleSubmit}
             >
                 <Card>
-                    <Typography>Ajout d'utilisateur</Typography>
+                    <Typography>{data.id_utilisateur ? 'Modification' : "Ajout"} d'un utilisateur</Typography>
                     <FormControl required>
                         <FormLabel>Nom</FormLabel>
                         <Input

@@ -1,6 +1,7 @@
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Card, Stack, Typography } from '@mui/joy'
+import { CardMedia } from '@mui/material'
 import React from 'react'
 
 const Header = ({ setisNavbarOpened }) => {
@@ -23,8 +24,14 @@ const Header = ({ setisNavbarOpened }) => {
                     onClick={() => setisNavbarOpened && setisNavbarOpened(true)}
                 >Menu</Button>
                 <Stack direction="row" gap={1} sx={{ p: 1 }} alignItems={"center"}>
-                    <Avatar></Avatar>
-                    <Typography>Nom du projet</Typography>
+                    <CardMedia
+                        component={"img"}
+                        src={require("../../assets/logo.png")}
+                        sx={{
+                            width: 50
+                        }}
+                    />
+                    <Typography color='primary' level='h3'>Groupe Sahel</Typography>
                 </Stack>
             </Stack>
         </Card>

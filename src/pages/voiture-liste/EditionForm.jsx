@@ -116,7 +116,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
                 onSubmit={haandleSubmit}
             >
                 <Card>
-                    <Typography>Ajout d'utilisateur</Typography>
+                    <Typography>{data.id_vehicule ? 'Modifier' : "Ajouter"} de voiture de service</Typography>
 
                     <FormControl>
                         <FormLabel>Matricule</FormLabel>
