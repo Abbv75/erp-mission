@@ -62,6 +62,8 @@ const MissionListe = () => {
                             key={index}
                             data={value}
                             loadMission={loadMission}
+                            setcurrentValue={setcurrentValue}
+                            setisFormOpened={setisFormOpened}
                         />
                     ))
                 }

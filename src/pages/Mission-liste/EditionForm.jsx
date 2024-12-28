@@ -1,12 +1,10 @@
 import { faPaperPlane, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Card, FormControl, FormLabel, Input, Modal, Option, Select, Stack, Typography } from '@mui/joy'
+import { Button, Card, FormControl, FormLabel, Input, Modal, Stack, Typography } from '@mui/joy'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { editeUser } from '../../functions/editeUser'
-import { addVehicule } from '../../functions/addVehicule'
-import { editeVehicule } from '../../functions/editeVehicule'
 import { addMission } from '../../functions/addMission'
+import { editeMission } from '../../functions/editeMission'
 
 const EditionForm = ({ isFormOpened = false, setisFormOpened, loadMission, currentValue = null }) => {
     const [data, setdata] = useState({
@@ -27,26 +25,25 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadMission, curre
         } = data;
 
         if (!!id_mission) {
-            // editeVehicule(
-            //     matricule,
-            //     date_achat,
-            //     type,
-            //     marque,
-            //     id_voiture
-            // ).then(
-            //     () => {
-            //         toast.success("Utilisateur modifier avec succes");
-            //         loadVehicule && loadVehicule();
-            //     }
-            // ).catch(
-            //     () => {
-            //         toast.error("Utilisateur non modifier");
-            //     }
-            // ).finally(
-            //     () => {
-            //         setisFormOpened(false);
-            //     }
-            // )
+            editeMission(
+                date_depart,
+                date_arrivee,
+                kilometrage,
+                id_mission,
+            ).then(
+                () => {
+                    toast.success("Mission modifier avec succes");
+                    loadMission && loadMission();
+                }
+            ).catch(
+                () => {
+                    toast.error("Mission non modifier");
+                }
+            ).finally(
+                () => {
+                    setisFormOpened(false);
+                }
+            )
         }
         else {
             addMission(
@@ -77,7 +74,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadMission, curre
                     date_arrivee: currentValue?.date_arrivee,
                     date_depart: currentValue.date_depart,
                     kilometrage: currentValue?.kilometrage,
-                    id_mission: currentValue.id_voiture,
+                    id_mission: currentValue.id_mission,
                 })
             }
             else {

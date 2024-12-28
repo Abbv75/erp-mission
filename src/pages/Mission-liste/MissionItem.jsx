@@ -5,7 +5,7 @@ import React from 'react'
 import { toast } from 'react-toastify'
 import { deleteMission } from '../../functions/deleteMission'
 
-const MissionItem = ({ data, loadMission }) => {
+const MissionItem = ({ data, loadMission, setcurrentValue, setisFormOpened }) => {
     const handleDelete = (id) => {
         if (
             window.confirm("Etes vous sur de vouloir supprimer?")
@@ -87,6 +87,10 @@ const MissionItem = ({ data, loadMission }) => {
                     endDecorator={
                         <FontAwesomeIcon icon={faFeatherAlt} />
                     }
+                    onClick={() => {
+                        setcurrentValue && setcurrentValue(data);
+                        setisFormOpened && setisFormOpened(true);
+                    }}
                 >Modifier</Button>
             </ButtonGroup>
         </Card>
