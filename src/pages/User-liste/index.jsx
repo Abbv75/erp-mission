@@ -16,7 +16,8 @@ const UserListe = () => {
 
     const loadUser = useCallback(
         () => {
-            getAllUser().then(res => res && setdata(res))
+            getAllUser().then(res => res && setdata(res));
+            setcurrentValue(null);
         },
         []
     );
@@ -45,6 +46,11 @@ const UserListe = () => {
         }
     }
 
+    const handleAdd = () => {
+        setcurrentValue(null);
+        setisFormOpened(true);
+    }
+
     const handleEdite = (value) => {
         setcurrentValue(value);
         setisFormOpened(true);
@@ -68,7 +74,7 @@ const UserListe = () => {
                         </Avatar>
                     }
                     size='sm'
-                    onClick={() => setisFormOpened(true)}
+                    onClick={() => handleAdd()}
                 >Ajouter</Button>
             </Stack>
 

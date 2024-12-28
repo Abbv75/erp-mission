@@ -4,8 +4,9 @@ import { Button, Card, FormControl, FormLabel, Input, Modal, Stack, Typography }
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { addUser } from '../../functions/addUser'
+import { editeUser } from '../../functions/editeUser'
 
-const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentValue }) => {
+const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentValue=null }) => {
     const [data, setdata] = useState({
         id_utilisateur: undefined,
         nom: undefined,
@@ -27,7 +28,8 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
             login,
             idRole,
             prenom,
-            telephone
+            telephone,
+            id_utilisateur
         } = data;
 
         if (password != passwordConfirmation) {
@@ -35,32 +37,59 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
             return false;
         }
 
-        addUser(
-            nom,
-            login,
-            password,
-            idRole || 1,
-            prenom,
-            telephone
-        ).then(
-            () => {
-                toast.success("Utilisateur ajouter avec succes");
-                loadUser && loadUser();
-            }
-        ).catch(
-            () => {
-                toast.error("Utilisateur non ajouter");
-            }
-        ).finally(
-            () => {
-                setisFormOpened(false);
-            }
-        )
+        if (!!id_utilisateur) {
+            editeUser(
+                id_utilisateur,
+                nom,
+                login,
+                password,
+                idRole || 1,
+                prenom,
+                telephone
+            ).then(
+                () => {
+                    toast.success("Utilisateur modifier avec succes");
+                    loadUser && loadUser();
+                }
+            ).catch(
+                () => {
+                    toast.error("Utilisateur non modifier");
+                }
+            ).finally(
+                () => {
+                    setisFormOpened(false);
+                }
+            )
+        }
+        else {
+            addUser(
+                nom,
+                login,
+                password,
+                idRole || 1,
+                prenom,
+                telephone
+            ).then(
+                () => {
+                    toast.success("Utilisateur ajouter avec succes");
+                    loadUser && loadUser();
+                }
+            ).catch(
+                () => {
+                    toast.error("Utilisateur non ajouter");
+                }
+            ).finally(
+                () => {
+                    setisFormOpened(false);
+                }
+            )
+        }
+
     }
 
     useEffect(
         () => {
-            if (currentValue) {
+            if (!!currentValue) {
                 setdata({
                     id_utilisateur: currentValue?.id_utilisateur,
                     nom: currentValue.nom_utilisateur,
@@ -70,6 +99,18 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
                     passwordConfirmation: currentValue.password,
                     telephone: currentValue?.telephone,
                     idRole: currentValue.idRole,
+                })
+            }
+            else {
+                setdata({
+                    id_utilisateur: undefined,
+                    nom: undefined,
+                    prenom: undefined,
+                    login: undefined,
+                    password: undefined,
+                    passwordConfirmation: undefined,
+                    telephone: undefined,
+                    idRole: undefined,
                 })
             }
         },

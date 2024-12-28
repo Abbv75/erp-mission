@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const editeUser = async (
+    id,
     nom,
     login,
     password,
@@ -10,8 +11,9 @@ export const editeUser = async (
 ) => {
     try {
         await axios.postForm(
-            `${process.env.REACT_APP_API_URL}/addUser.php`,
+            `${process.env.REACT_APP_API_URL}/editeUser.php`,
             {
+                id,
                 nom,
                 prenom,
                 telephone,
@@ -22,7 +24,7 @@ export const editeUser = async (
         );
 
         console.log('====================================');
-        console.log("Utilisateur ajouter avec success");
+        console.log("Utilisateur modifier avec success");
         console.log('====================================');
 
         return true;
