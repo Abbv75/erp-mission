@@ -69,7 +69,7 @@ const Navbar = ({
                 }
                 size='lg'
                 component={"a"}
-                href=''
+                href='/mission-liste'
             >
                 <Typography width={"100%"} textAlign={"left"}>Gestion des missions</Typography>
             </Button>
