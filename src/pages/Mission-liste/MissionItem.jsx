@@ -1,4 +1,4 @@
-import { faFeatherAlt, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faArrowAltCircleRight, faFeatherAlt, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, ButtonGroup, Card, Divider, Stack, Typography } from '@mui/joy'
 import React from 'react'
@@ -75,23 +75,32 @@ const MissionItem = ({ data, loadMission, setcurrentValue, setisFormOpened }) =>
             <ButtonGroup variant='solid'>
                 <Button
                     fullWidth
-                    color='danger'
-                    startDecorator={
-                        <FontAwesomeIcon icon={faTrashArrowUp} />
-                    }
-                    onClick={() => handleDelete(data.id_mission)}
-                >Supprimer</Button>
-                <Button
-                    fullWidth
                     color='primary'
                     endDecorator={
-                        <FontAwesomeIcon icon={faFeatherAlt} />
+                        <FontAwesomeIcon icon={faArrowAltCircleRight} />
                     }
+                    onClick={() => handleDelete(data.id_mission)}
+                >Ouvrir</Button>
+
+                <Button
+                    color='neutral'
+                    title='Modifier'
                     onClick={() => {
                         setcurrentValue && setcurrentValue(data);
                         setisFormOpened && setisFormOpened(true);
                     }}
-                >Modifier</Button>
+                >
+                    <FontAwesomeIcon icon={faFeatherAlt} />
+                </Button>
+
+                <Button
+                    title='Supprimer'
+                    color='danger'
+                    onClick={() => handleDelete(data.id_mission)}
+                >
+                    <FontAwesomeIcon icon={faTrashArrowUp} />
+                </Button>
+
             </ButtonGroup>
         </Card>
     )
