@@ -7,6 +7,7 @@ $response = new Response(null, 200, []);
 
 try {
     if (!isset(
+        $_POST['id'],
         $_POST['nom'],
         $_POST['login'],
         $_POST['password'],
@@ -17,21 +18,22 @@ try {
 
     extract($_POST);
 
-    $query = $bdd->prepare('SELECT * FROM utilisateur WHERE login=?');
-    $query->execute([$login]);
+    $query = $bdd->prepare('SELECT * FROM utilisateur WHERE id_utilisateur=?');
+    $query->execute([$id]);
 
-    if ($query->fetch()) {
-        $response->satutCode403("Un utilisateur existe deja avec ce login");
+    if (!$query->fetch()) {
+        $response->satutCode404("utilisateur introuvable");
     }
 
-    $query = $bdd->prepare('INSERT INTO utilisateur (
-        nom_utilisateur, 
-        prenom_utilisateur, 
-        login, 
-        password, 
-        id_role, 
-        telephone
-    ) VALUES (?,?,?,?,?,?) ');
+    $query = $bdd->prepare('UPDATE utilisateur SET
+        nom_utilisateur=?, 
+        prenom_utilisateur=?, 
+        login = ?, 
+        password = ?, 
+        id_role = ?, 
+        telephone = ?
+        WHERE id_utilisateur = ?
+    ');
 
     if (!$query->execute([
         $nom,
@@ -40,6 +42,7 @@ try {
         $password,
         $idRole,
         $telephone ?? null,
+        $id
     ])) {
         $response->satutCode500("sauvegarde echouer");
     }
