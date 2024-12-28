@@ -6,7 +6,7 @@ import { login as loginUser } from "../../functions/login"
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-const Connexion = () => {
+const Connexion = ({ setcurrentUser }) => {
     const [login, setlogin] = useState(null);
     const [password, setpassword] = useState(null);
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ const Connexion = () => {
 
             if (user) {
                 toast.success("Connexion reussit avec success");
+                setcurrentUser(user)
                 setTimeout(() => {
                     navigate("user-liste");
                 }, 3000);

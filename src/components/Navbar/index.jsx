@@ -2,12 +2,18 @@ import { faStackOverflow } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faCarAlt, faTimes, faUserAstronaut } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Drawer, Typography } from '@mui/joy'
-import React from 'react'
+import React, { useState } from 'react'
 
 const Navbar = ({
     isNavbarOpened = true,
     setisNavbarOpened
 }) => {
+    const [currentUser, setcurrentUser] = useState(
+        JSON.parse(localStorage.getItem("currentUser"))
+    );
+
+    // alert(currentUser)
+
     return (
         <Drawer
             onClose={() => setisNavbarOpened && setisNavbarOpened(false)}
@@ -16,7 +22,8 @@ const Navbar = ({
                 content: {
                     sx: {
                         padding: 2,
-                        gap: 1
+                        gap: 1,
+                        height: "100%"
                     }
                 }
             }}
@@ -32,19 +39,23 @@ const Navbar = ({
             >
                 Fermer
             </Button>
-            <Button
-                variant='soft'
-                startDecorator={
-                    <Avatar variant='solid'>
-                        <FontAwesomeIcon icon={faUserAstronaut} />
-                    </Avatar>
-                }
-                size='lg'
-                component={"a"}
-                href='/user-liste'
-            >
-                <Typography textAlign={"left"} width={"100%"}>Gestion des utilisateurs</Typography>
-            </Button>
+            {
+                currentUser?.nomRole == 'administrateur' && (
+                    <Button
+                        variant='soft'
+                        startDecorator={
+                            <Avatar variant='solid'>
+                                <FontAwesomeIcon icon={faUserAstronaut} />
+                            </Avatar>
+                        }
+                        size='lg'
+                        component={"a"}
+                        href='/user-liste'
+                    >
+                        <Typography textAlign={"left"} width={"100%"}>Gestion des utilisateurs</Typography>
+                    </Button>
+                )
+            }
 
             <Button
                 variant='soft'
