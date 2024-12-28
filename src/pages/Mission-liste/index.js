@@ -1,10 +1,27 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Stack, Typography } from '@mui/joy'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import MissionItem from './MissionItem'
+import { getAllMission } from '../../functions/getAllMission'
 
 const MissionListe = () => {
+    const [data, setdata] = useState([]);
+
+    const loadMission = useCallback(
+        () => {
+            getAllMission().then(res => res && setdata(res));
+        },
+        []
+    );
+
+    useEffect(
+        () => {
+            loadMission();
+        },
+        []
+    );
+
     const handleAdd = () => {
         // setcurrentValue(null);
         // setisFormOpened(true);
@@ -18,7 +35,7 @@ const MissionListe = () => {
                 direction={"row"}
                 justifyContent={"space-between"}
             >
-                <Typography level="h4">Liste des utilisateurs</Typography>
+                <Typography level="h4">Liste des missions</Typography>
                 <Button
                     endDecorator={
                         <Avatar
@@ -36,7 +53,14 @@ const MissionListe = () => {
                 direction={"row"}
                 gap={2}
             >
-                <MissionItem/>
+                {
+                    data.map((value, index) => (
+                        <MissionItem
+                            key={index}
+                            data={value}
+                        />
+                    ))
+                }
             </Stack>
         </Stack>
     )

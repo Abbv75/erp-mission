@@ -3,11 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, ButtonGroup, Card, Divider, Stack, Typography } from '@mui/joy'
 import React from 'react'
 
-const MissionItem = () => {
+const MissionItem = ({ data }) => {
     return (
         <Card
             sx={{
-                p: 1
+                p: 1,
+                cursor: "pointer"
+            }}
+            onClick={() => {
+
             }}
         >
             <Stack
@@ -19,7 +23,7 @@ const MissionItem = () => {
             >
 
                 <Avatar variant='outlined' color='primary' sx={{ fontWeight: 700 }}>
-                    1
+                    {data.id_mission}
                 </Avatar>
 
                 <Stack
@@ -32,19 +36,19 @@ const MissionItem = () => {
                 >
                     <Stack>
                         <Typography fontWeight={700} color='primary'>Date de depart:</Typography>
-                        <Typography>5/845/4</Typography>
+                        <Typography>{data.date_depart}</Typography>
                     </Stack>
                     <Divider />
 
                     <Stack>
                         <Typography fontWeight={700} color='primary'>Date d'arrivée:</Typography>
-                        <Typography>5/845/4</Typography>
+                        <Typography>{data.date_arrivee}</Typography>
                     </Stack>
                     <Divider />
 
                     <Stack>
                         <Typography fontWeight={700} color='primary'>Distance:</Typography>
-                        <Typography>500 KM</Typography>
+                        <Typography>{data.kilometrage} KM</Typography>
                     </Stack>
                 </Stack>
             </Stack>
