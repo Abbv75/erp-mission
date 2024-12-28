@@ -4,8 +4,11 @@ import { Avatar, Button, ButtonGroup, Card, Divider, Stack, Typography } from '@
 import React from 'react'
 import { toast } from 'react-toastify'
 import { deleteMission } from '../../functions/deleteMission'
+import { useNavigate } from 'react-router-dom'
 
 const MissionItem = ({ data, loadMission, setcurrentValue, setisFormOpened }) => {
+    const navigate = useNavigate();
+
     const handleDelete = (id) => {
         if (
             window.confirm("Etes vous sur de vouloir supprimer?")
@@ -79,7 +82,7 @@ const MissionItem = ({ data, loadMission, setcurrentValue, setisFormOpened }) =>
                     endDecorator={
                         <FontAwesomeIcon icon={faArrowAltCircleRight} />
                     }
-                    onClick={() => handleDelete(data.id_mission)}
+                    onClick={() => navigate(`/mission/${data.id_mission}`)}
                 >Ouvrir</Button>
 
                 <Button
