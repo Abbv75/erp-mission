@@ -9,6 +9,7 @@ import { deleteUser } from '../../functions/deleteUser'
 import { toast } from 'react-toastify'
 import { getAllRole } from '../../functions/getAllRole'
 import { getAllVehicule } from '../../functions/getAllVehicule'
+import { deleteVehicule } from '../../functions/deleteVehicule'
 
 const VoitureListe = () => {
     const [data, setdata] = useState([]);
@@ -26,7 +27,6 @@ const VoitureListe = () => {
     useEffect(
         () => {
             loadVehicule();
-            loadRole();
         },
         []
     );
@@ -35,7 +35,7 @@ const VoitureListe = () => {
         if (
             window.confirm("Etes vous sur de vouloir supprimer?")
         ) {
-            deleteUser(id).then(
+            deleteVehicule(id).then(
                 () => {
                     toast.success("Suppression reussit");
                     loadVehicule();
@@ -102,7 +102,7 @@ const VoitureListe = () => {
                         <FontAwesomeIcon
                             icon={faTrashArrowUp}
                             color='red'
-                            onClick={() => handleDelete(value?.id_utilisateur)}
+                            onClick={() => handleDelete(value?.id_vehicule)}
                             title='supprimer'
                         />
                     </Stack>

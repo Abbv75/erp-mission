@@ -5,8 +5,9 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { editeUser } from '../../functions/editeUser'
 import { addVehicule } from '../../functions/addVehicule'
+import { editeVehicule } from '../../functions/editeVehicule'
 
-const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, currentValue = null}) => {
+const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, currentValue = null }) => {
     const [data, setdata] = useState({
         id_voiture: undefined,
         date_achat: undefined,
@@ -27,14 +28,12 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
         } = data;
 
         if (!!id_voiture) {
-            editeUser(
-                id_utilisateur,
-                nom,
-                login,
-                password,
-                idRole || 1,
-                prenom,
-                telephone
+            editeVehicule(
+                matricule,
+                date_achat,
+                type,
+                marque,
+                id_voiture
             ).then(
                 () => {
                     toast.success("Utilisateur modifier avec succes");
