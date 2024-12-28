@@ -73,7 +73,7 @@ const VoitureListe = () => {
                 direction={"row"}
                 justifyContent={"space-between"}
             >
-                <Typography level="h4">Liste des utilisateurs</Typography>
+                <Typography level="h4">Liste des voitures de missions</Typography>
                 <Button
                     endDecorator={
                         <Avatar
