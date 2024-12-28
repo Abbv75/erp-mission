@@ -2,19 +2,17 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
-import UserCard from './UserCard'
-import { getAllMissionParticipant } from '../../../functions/getAllMissionParticipant'
-import { useParams } from 'react-router-dom'
 import AddUserForm from './AddUserForm'
-import { getAllVehicule } from '../../../functions/getAllVehicule'
+import { getAllMissionVehicule } from '../../../functions/getAllMissionVehicule'
+import VoitureCard from '../../../components/VoitureCard'
 
 const VehiculeZone = ({ id_mission }) => {
-    const [participantListe, setparticipantListe] = useState([]);
+    const [vehiculeListe, setvehiculeListe] = useState([]);
     const [isFormOpened, setisFormOpened] = useState(false);
 
     const loadVehicule = useCallback(
         () => {
-            getAllVehicule(id_mission).then(res => res && setparticipantListe(res));
+            getAllMissionVehicule(id_mission).then(res => res && setvehiculeListe(res));
         },
         []
     );
@@ -57,11 +55,11 @@ const VehiculeZone = ({ id_mission }) => {
                 flexWrap={"wrap"}
             >
                 {
-                    participantListe.map(value => (
-                        <UserCard
+                    vehiculeListe.map(value => (
+                        <VoitureCard
                             data={value}
-                            loadParticipant={loadParticipant}
-                            id_mission={id_mission}
+                        // loadParticipant={loadParticipant}
+                        // id_mission={id_mission}
                         />
                     ))
                 }
@@ -71,7 +69,7 @@ const VehiculeZone = ({ id_mission }) => {
                 isFormOpened={isFormOpened}
                 setisFormOpened={setisFormOpened}
                 id_mission={id_mission}
-                loadParticipant={loadParticipant}
+            // loadParticipant={loadParticipant}
             />
         </Stack>
     )

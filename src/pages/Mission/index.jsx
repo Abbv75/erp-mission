@@ -20,7 +20,9 @@ const Mission = () => {
                 id_mission={id_mission}
             />
 
-            <VehiculeZone />
+            <VehiculeZone
+                id_mission={id_mission}
+            />
         </Stack>
     )
 }
