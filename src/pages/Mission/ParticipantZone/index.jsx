@@ -54,6 +54,8 @@ const ParticipantZone = () => {
                     participantListe.map(value => (
                         <UserCard
                             data={value}
+                            loadParticipant={loadParticipant}
+                            id_mission={id_mission}
                         />
                     ))
                 }

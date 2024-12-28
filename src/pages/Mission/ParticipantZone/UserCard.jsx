@@ -2,8 +2,28 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Card, Stack, Typography } from '@mui/joy'
 import React from 'react'
+import { deleteMissionParticipant } from '../../../functions/deleteMissionParticipant'
+import { toast } from 'react-toastify'
 
-const UserCard = ({ data }) => {
+const UserCard = ({ data, loadParticipant, id_mission }) => {
+
+    const handleDelete = () => {
+        if (
+            window.confirm("Etes vous sur de vouloir supprimer?")
+        ) {
+            deleteMissionParticipant(data.id_utilisateur, id_mission).then(
+                () => {
+                    toast.success("Suppression reussit");
+                    loadParticipant && loadParticipant();
+                }
+            ).catch(
+                () => {
+                    toast.error("Suppression echouer");
+                }
+            )
+        }
+    }
+
     return (
         <Card
             sx={{
@@ -28,7 +48,12 @@ const UserCard = ({ data }) => {
                 <a href={'tel:6606305'}>66035300</a>
             </Stack>
 
-            <Button endDecorator={<FontAwesomeIcon icon={faTimesCircle} />}>Supprimer de la liste</Button>
+            <Button
+                endDecorator={
+                    <FontAwesomeIcon icon={faTimesCircle} />
+                }
+                onClick={() => handleDelete()}
+            >Supprimer de la liste</Button>
         </Card>
     )
 }
