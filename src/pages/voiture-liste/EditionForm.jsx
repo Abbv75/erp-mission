@@ -6,30 +6,24 @@ import { toast } from 'react-toastify'
 import { addUser } from '../../functions/addUser'
 import { editeUser } from '../../functions/editeUser'
 
-const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentValue = null, roleList = [] }) => {
+const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, currentValue = null, roleList = [] }) => {
     const [data, setdata] = useState({
-        id_utilisateur: undefined,
-        nom: undefined,
-        prenom: undefined,
-        login: undefined,
-        password: undefined,
-        passwordConfirmation: undefined,
-        telephone: undefined,
-        idRole: roleList[0]?.idRole || 1,
+        id_voiture: undefined,
+        date_achat: undefined,
+        matricule: undefined,
+        type: 1,
+        marque: 1,
     });
 
     const haandleSubmit = (e) => {
         e.preventDefault();
 
         const {
-            password,
-            passwordConfirmation,
-            nom,
-            login,
-            idRole,
-            prenom,
-            telephone,
-            id_utilisateur
+            matricule,
+            date_achat,
+            type,
+            marque,
+            id_voiture
         } = data;
 
         if (password != passwordConfirmation) {
@@ -49,7 +43,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
             ).then(
                 () => {
                     toast.success("Utilisateur modifier avec succes");
-                    loadUser && loadUser();
+                    loadVehicule && loadVehicule();
                 }
             ).catch(
                 () => {
@@ -72,7 +66,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
             ).then(
                 () => {
                     toast.success("Utilisateur ajouter avec succes");
-                    loadUser && loadUser();
+                    loadVehicule && loadVehicule();
                 }
             ).catch(
                 () => {
@@ -103,14 +97,11 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
             }
             else {
                 setdata({
-                    id_utilisateur: undefined,
-                    nom: undefined,
-                    prenom: undefined,
-                    login: undefined,
-                    password: undefined,
-                    passwordConfirmation: undefined,
-                    telephone: undefined,
-                    idRole: undefined,
+                    id_voiture: undefined,
+                    date_achat: undefined,
+                    matricule: undefined,
+                    type: 1,
+                    marque: 1,
                 })
             }
         },
@@ -137,90 +128,62 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
             >
                 <Card>
                     <Typography>Ajout d'utilisateur</Typography>
-                    <FormControl required>
-                        <FormLabel>Nom</FormLabel>
-                        <Input
-                            placeholder='Saisissez le nom'
-                            value={data.nom}
-                            onChange={({ target }) => setdata({
-                                ...data,
-                                nom: target.value
-                            })}
-                        />
-                    </FormControl>
+
                     <FormControl>
-                        <FormLabel>Prenom</FormLabel>
+                        <FormLabel>Matricule</FormLabel>
                         <Input
-                            placeholder='Saisissez le prenom'
-                            value={data.prenom}
+                            placeholder='Saisissez le Matricule'
+                            value={data.matricule}
                             onChange={({ target }) => setdata({
                                 ...data,
-                                prenom: target.value
+                                matricule: target.value
                             })}
                         />
                     </FormControl>
+
                     <FormControl>
                         <FormLabel>Numero</FormLabel>
                         <Input
-                            placeholder='Saisissez le numero'
-                            value={data.telephone}
+                            placeholder="Selectionnez la date d'achat"
+                            value={data.date_achat}
                             onChange={({ target }) => setdata({
                                 ...data,
-                                telephone: target.value
+                                date_achat: target.value
                             })}
+                            type='date'
                         />
                     </FormControl>
+
                     <FormControl required>
-                        <FormLabel>Login</FormLabel>
-                        <Input
-                            placeholder='Saisissez le login'
-                            value={data.login}
-                            onChange={({ target }) => setdata({
-                                ...data,
-                                login: target.value
-                            })}
-                        />
-                    </FormControl>
-                    <FormControl required>
-                        <FormLabel>Role</FormLabel>
+                        <FormLabel>Type</FormLabel>
                         <Select
-                            value={data.idRole || 1}
+                            value={data.type || "Voiture"}
                             onChange={(e, value) => setdata({
                                 ...data,
-                                idRole: value
+                                type: value
                             })}
                         >
-                            {
-                                roleList.map(value => (
-                                    <Option value={value.idRole}>{value.nomRole}</Option>
-
-                                ))
-                            }
+                            <Option value={"Voiture"}>Voiture</Option>
+                            <Option value={"Moto"}>Moto</Option>
+                            <Option value={"Avion"}>Avion</Option>
                         </Select>
                     </FormControl>
-                    <FormControl required>
-                        <FormLabel>Mot de passe</FormLabel>
-                        <Input
-                            placeholder='Saisissez le mot de passe'
-                            value={data.password}
-                            onChange={({ target }) => setdata({
-                                ...data,
-                                password: target.value
-                            })}
 
-                        />
-                    </FormControl>
                     <FormControl required>
-                        <FormLabel>Confirmez le mot de passe</FormLabel>
-                        <Input
-                            placeholder='Confirmez le mot de passe'
-                            value={data.passwordConfirmation}
-                            onChange={({ target }) => setdata({
+                        <FormLabel>Marque</FormLabel>
+                        <Select
+                            value={data.type || "Toyota"}
+                            onChange={(e, value) => setdata({
                                 ...data,
-                                passwordConfirmation: target.value
+                                marque: value
                             })}
-                            type='password'
-                        />
+                        >
+                            <Option value={"Toyota"}>Toyota</Option>
+                            <Option value={"Mercedes"}>Mercedes</Option>
+                            <Option value={"Yamaha"}>Yamaha</Option>
+                            <Option value={"Djakarta"}>Djakarta</Option>
+                            <Option value={"Escalade"}>Escalade</Option>
+                        </Select>
                     </FormControl>
 
                     <Stack
@@ -236,13 +199,14 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
                             type='reset'
                             onClick={() => setisFormOpened(false)}
                         >Annuler</Button>
+                        
                         <Button
                             fullWidth
                             endDecorator={
                                 <FontAwesomeIcon icon={faPaperPlane} />
                             }
                             type='submit'
-                            disabled={!data.password || !data.passwordConfirmation || data.password != data.passwordConfirmation}
+                            disabled={!data.matricule || !data.date_achat || !data.type || !data.marque}
                         >Valider</Button>
                     </Stack>
                 </Card>

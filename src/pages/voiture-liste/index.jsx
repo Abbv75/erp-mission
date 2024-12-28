@@ -8,6 +8,7 @@ import EditionForm from './EditionForm'
 import { deleteUser } from '../../functions/deleteUser'
 import { toast } from 'react-toastify'
 import { getAllRole } from '../../functions/getAllRole'
+import { getAllVehicule } from '../../functions/getAllVehicule'
 
 const VoitureListe = () => {
     const [data, setdata] = useState([]);
@@ -15,9 +16,9 @@ const VoitureListe = () => {
     const [currentValue, setcurrentValue] = useState(null);
     const [roleList, setroleList] = useState([]);
 
-    const loadUser = useCallback(
+    const loadVehicule = useCallback(
         () => {
-            getAllUser().then(res => res && setdata(res));
+            getAllVehicule().then(res => res && setdata(res));
             setcurrentValue(null);
         },
         []
@@ -32,7 +33,7 @@ const VoitureListe = () => {
 
     useEffect(
         () => {
-            loadUser();
+            loadVehicule();
             loadRole();
         },
         []
@@ -45,7 +46,7 @@ const VoitureListe = () => {
             deleteUser(id).then(
                 () => {
                     toast.success("Suppression reussit");
-                    loadUser();
+                    loadVehicule();
                 }
             ).catch(
                 () => {
@@ -90,12 +91,11 @@ const VoitureListe = () => {
             <CustomTable
                 headerList={['id', 'Matricule', "Date d'achat", "Type", "Marque", 'action']}
                 data={data.map(value => [
-                    value?.id_utilisateur,
-                    value?.nom_utilisateur,
-                    value?.prenom_utilisateur,
-                    value?.login,
-                    value?.nomRole,
-                    value?.telephone,
+                    value?.id_vehicule,
+                    value?.matricule,
+                    value?.date_achat,
+                    value?.type,
+                    value?.marque,
                     <Stack
                         direction={"row"}
                         gap={1}
@@ -120,7 +120,7 @@ const VoitureListe = () => {
             <EditionForm
                 setisFormOpened={setisFormOpened}
                 isFormOpened={isFormOpened}
-                loadUser={loadUser}
+                loadVehicule={loadVehicule}
                 currentValue={currentValue}
                 roleList={roleList}
             />

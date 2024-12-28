@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getAllUser = async () => {
+export const getAllVehicule = async () => {
     try {
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/getAllVehicule.php`);
 
