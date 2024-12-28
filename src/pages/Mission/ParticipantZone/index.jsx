@@ -5,10 +5,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 import UserCard from './UserCard'
 import { getAllMissionParticipant } from '../../../functions/getAllMissionParticipant'
 import { useParams } from 'react-router-dom'
+import AddUserForm from './AddUserForm'
 
 const ParticipantZone = () => {
     const { id_mission } = useParams();
     const [participantListe, setparticipantListe] = useState([]);
+    const [isFormOpened, setisFormOpened] = useState(false);
 
     const loadParticipant = useCallback(
         () => {
@@ -23,6 +25,10 @@ const ParticipantZone = () => {
         },
         []
     );
+
+    const handleAdd = () => {
+        setisFormOpened(true);
+    }
 
 
     return (
@@ -41,7 +47,7 @@ const ParticipantZone = () => {
                         </Avatar>
                     }
                     size='sm'
-                // onClick={() => handleAdd()}
+                    onClick={() => handleAdd()}
                 >Ajouter</Button>
             </Stack>
 
@@ -60,6 +66,11 @@ const ParticipantZone = () => {
                     ))
                 }
             </Stack>
+
+            <AddUserForm
+                isFormOpened={isFormOpened}
+                setisFormOpened={setisFormOpened}
+            />
         </Stack>
     )
 }
