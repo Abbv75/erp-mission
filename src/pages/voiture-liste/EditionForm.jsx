@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { editeUser } from '../../functions/editeUser'
 import { addVehicule } from '../../functions/addVehicule'
 
-const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, currentValue = null, roleList = [] }) => {
+const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, currentValue = null}) => {
     const [data, setdata] = useState({
         id_voiture: undefined,
         date_achat: undefined,

@@ -14,19 +14,11 @@ const VoitureListe = () => {
     const [data, setdata] = useState([]);
     const [isFormOpened, setisFormOpened] = useState(false);
     const [currentValue, setcurrentValue] = useState(null);
-    const [roleList, setroleList] = useState([]);
 
     const loadVehicule = useCallback(
         () => {
             getAllVehicule().then(res => res && setdata(res));
             setcurrentValue(null);
-        },
-        []
-    );
-
-    const loadRole = useCallback(
-        () => {
-            getAllRole().then(res => res && setroleList(res));
         },
         []
     );
@@ -122,7 +114,6 @@ const VoitureListe = () => {
                 isFormOpened={isFormOpened}
                 loadVehicule={loadVehicule}
                 currentValue={currentValue}
-                roleList={roleList}
             />
         </Stack>
     )
