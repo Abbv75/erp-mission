@@ -88,7 +88,7 @@ const VoitureListe = () => {
             </Stack>
 
             <CustomTable
-                headerList={['id', 'Nom', "Prenom", "Login", "Role", "Telephone", 'action']}
+                headerList={['id', 'Matricule', "Date d'achat", "Type", "Marque", 'action']}
                 data={data.map(value => [
                     value?.id_utilisateur,
                     value?.nom_utilisateur,
