@@ -40,9 +40,12 @@ const Navbar = ({
                     </Avatar>
                 }
                 size='lg'
+                component={"a"}
+                href='/user-liste'
             >
                 <Typography textAlign={"left"} width={"100%"}>Gestion des utilisateurs</Typography>
             </Button>
+
             <Button
                 variant='soft'
                 startDecorator={
@@ -51,9 +54,12 @@ const Navbar = ({
                     </Avatar>
                 }
                 size='lg'
+                component={"a"}
+                href='/voiture-liste'
             >
                 <Typography width={"100%"} textAlign={"left"}>Gestion des voitures de mission</Typography>
             </Button>
+
             <Button
                 variant='soft'
                 startDecorator={
@@ -62,6 +68,8 @@ const Navbar = ({
                     </Avatar>
                 }
                 size='lg'
+                component={"a"}
+                href=''
             >
                 <Typography width={"100%"} textAlign={"left"}>Gestion des missions</Typography>
             </Button>
