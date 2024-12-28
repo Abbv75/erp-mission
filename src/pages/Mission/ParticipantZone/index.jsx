@@ -1,10 +1,28 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, Stack, Typography } from '@mui/joy'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import UserCard from './UserCard'
+import { getAllUser } from '../../../functions/getAllUser'
 
 const ParticipantZone = () => {
+    const [participantListe, setparticipantListe] = useState([]);
+
+    const loadUser = useCallback(
+        () => {
+            getAllUser().then(res => res && setparticipantListe(res));
+        },
+        []
+    );
+
+    useEffect(
+        () => {
+            loadUser();
+        },
+        []
+    );
+
+
     return (
         <Stack gap={2}>
             <Stack
@@ -27,10 +45,16 @@ const ParticipantZone = () => {
 
             <Stack
                 direction={"row"}
-                gap={2}
+                gap={3}
                 flexWrap={"wrap"}
             >
-                <UserCard />
+                {
+                    participantListe.map(value => (
+                        <UserCard 
+                            data={value}
+                        />
+                    ))
+                }
             </Stack>
         </Stack>
     )
