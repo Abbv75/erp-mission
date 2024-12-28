@@ -8,7 +8,7 @@ import EditionForm from './EditionForm'
 
 const UserListe = () => {
     const [data, setdata] = useState([]);
-    const [isFormOpened, setisFormOpened] = useState(true);
+    const [isFormOpened, setisFormOpened] = useState(false);
 
     const loadUser = useCallback(
         () => {
