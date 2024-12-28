@@ -7,12 +7,13 @@ import { getAllUser } from '../../functions/getAllUser'
 import EditionForm from './EditionForm'
 import { deleteUser } from '../../functions/deleteUser'
 import { toast } from 'react-toastify'
+import { getAllRole } from '../../functions/getAllRole'
 
 const UserListe = () => {
     const [data, setdata] = useState([]);
     const [isFormOpened, setisFormOpened] = useState(false);
     const [currentValue, setcurrentValue] = useState(null);
-
+    const [roleList, setroleList] = useState([]);
 
     const loadUser = useCallback(
         () => {
@@ -22,9 +23,17 @@ const UserListe = () => {
         []
     );
 
+    const loadRole = useCallback(
+        () => {
+            getAllRole().then(res => res && setroleList(res));
+        },
+        []
+    );
+
     useEffect(
         () => {
-            loadUser()
+            loadUser();
+            loadRole();
         },
         []
     );
@@ -113,6 +122,7 @@ const UserListe = () => {
                 isFormOpened={isFormOpened}
                 loadUser={loadUser}
                 currentValue={currentValue}
+                roleList={roleList}
             />
         </Stack>
     )

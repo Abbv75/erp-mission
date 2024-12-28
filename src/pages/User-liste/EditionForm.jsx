@@ -1,12 +1,12 @@
 import { faPaperPlane, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Card, FormControl, FormLabel, Input, Modal, Stack, Typography } from '@mui/joy'
+import { Button, Card, FormControl, FormLabel, Input, Modal, Option, Select, Stack, Typography } from '@mui/joy'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { addUser } from '../../functions/addUser'
 import { editeUser } from '../../functions/editeUser'
 
-const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentValue=null }) => {
+const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentValue = null, roleList = [] }) => {
     const [data, setdata] = useState({
         id_utilisateur: undefined,
         nom: undefined,
@@ -15,7 +15,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
         password: undefined,
         passwordConfirmation: undefined,
         telephone: undefined,
-        idRole: undefined,
+        idRole: roleList[0]?.idRole || 1,
     });
 
     const haandleSubmit = (e) => {
@@ -180,6 +180,23 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadUser, currentV
                                 login: target.value
                             })}
                         />
+                    </FormControl>
+                    <FormControl required>
+                        <FormLabel>Role</FormLabel>
+                        <Select
+                            value={data.idRole || 1}
+                            onChange={(e, value) => setdata({
+                                ...data,
+                                idRole: value
+                            })}
+                        >
+                            {
+                                roleList.map(value => (
+                                    <Option value={value.idRole}>{value.nomRole}</Option>
+
+                                ))
+                            }
+                        </Select>
                     </FormControl>
                     <FormControl required>
                         <FormLabel>Mot de passe</FormLabel>
