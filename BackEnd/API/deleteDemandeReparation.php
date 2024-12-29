@@ -6,17 +6,17 @@ require "../classes/Response.php";
 $response = new Response(null, 200, []);
 
 try {
-    $query = $bdd->query('SELECT * 
-        FROM vehicule
-        LEFT JOIN demandeReparation
-        ON vehicule.id_vehicule = demandeReparation.id_voiture
-    ');
-
-    if (!$res = $query->fetchAll(PDO::FETCH_ASSOC)) {
-        $response->satutCode404();
+    if (!isset($_POST['id'])) {
+        $response->satutCode403();
     }
 
-    $response->setData($res);
+    extract($_POST);
+
+    $query = $bdd->prepare('DELETE FROM demandeReparation WHERE id_voiture=?');
+
+    if (!$query->execute([$id])) {
+        $response->satutCode404();
+    }
 
     $response->satutCode200();
 } catch (\Throwable $th) {

@@ -3,9 +3,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import VoitureCard from '../../components/VoitureCard';
 import { getAllVehicule } from '../../functions/getAllVehicule';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGears } from '@fortawesome/free-solid-svg-icons';
+import { faGears, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { addDemandeReparation } from '../../functions/addDemandeReparation';
 import { toast } from 'react-toastify';
+import { deleteDemandeReparation } from '../../functions/deleteDemandeReparation';
 
 const DemandeReparation = () => {
     const [voitureListe, setvoitureListe] = useState([]);
@@ -37,6 +38,23 @@ const DemandeReparation = () => {
         )
     }
 
+    const handleDeleteDemande = (id) => {
+        if (!window.confirm("Etes vous sur de vouloir annuler?")) {
+            return false;
+        }
+
+        deleteDemandeReparation(id).then(
+            () => {
+                toast.success("Votre demande a ete annuler avec success. Un gestionnaire prendra votre demande en charge.");
+                loadVehicule();
+            }
+        ).catch(
+            () => {
+                toast.error("Une erreur est survenue lors de la soumission de votre annulation.");
+            }
+        )
+    }
+
 
     return (
         <Stack
@@ -51,10 +69,29 @@ const DemandeReparation = () => {
                         button={(
                             <Button
                                 endDecorator={
-                                    <FontAwesomeIcon icon={faGears} />
+                                    <FontAwesomeIcon icon={
+                                        value.statut == "en cours"
+                                            ? faTimesCircle
+                                            : faGears
+                                    } />
                                 }
-                                onClick={() => addDemande(value.id_vehicule)}
-                            >Demande une de reparation</Button>
+                                color={
+                                    value.statut == "en cours"
+                                        ? "danger"
+                                        : "primary"
+                                }
+                                onClick={() => {
+                                    value.statut == "en cours"
+                                        ? handleDeleteDemande(value.id_vehicule)
+                                        : addDemande(value.id_vehicule)
+                                }}
+                            >
+                                {
+                                    value.statut == "en cours"
+                                        ? "Annuler la demande"
+                                        : "Demande une de reparation"
+                                }
+                            </Button>
                         )}
                     />
                 ))
