@@ -6,6 +6,7 @@ import VoitureListe from '../../pages/voiture-liste'
 import MissionListe from '../../pages/Mission-liste'
 import Mission from '../../pages/Mission'
 import DemandeReparation from '../../pages/DemandeReparation'
+import Menu from '../../pages/Menu'
 
 const Router = () => {
     const [currentUser, setcurrentUser] = useState(
@@ -14,7 +15,7 @@ const Router = () => {
 
     return (
         <Routes>
-            <Route
+            {/* <Route
                 path='/*'
                 element={
                     !!currentUser
@@ -27,7 +28,9 @@ const Router = () => {
                         )
                         : <Connexion setcurrentUser={setcurrentUser} />
                 }
-            />
+            /> */}
+
+            <Route path='/*' element={<Menu />} />
 
             {
                 !!currentUser && (

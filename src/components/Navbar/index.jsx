@@ -12,8 +12,6 @@ const Navbar = ({
         JSON.parse(localStorage.getItem("currentUser"))
     );
 
-    // alert(currentUser)
-
     return (
         <Drawer
             onClose={() => setisNavbarOpened && setisNavbarOpened(false)}
