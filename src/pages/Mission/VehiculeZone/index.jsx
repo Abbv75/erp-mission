@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { getAllMissionVehicule } from '../../../functions/getAllMissionVehicule'
 import VoitureCard from '../../../components/VoitureCard'
 import AddVehiculeForm from './AddVehiculeForm'
+import StatistiqueCard from '../../../components/StatistiqueCard'
 
 const VehiculeZone = ({ id_mission }) => {
     const [vehiculeListe, setvehiculeListe] = useState([]);
@@ -30,7 +31,9 @@ const VehiculeZone = ({ id_mission }) => {
 
 
     return (
-        <Stack gap={2}>
+        <Stack gap={2} mt={7}>
+            
+
             <Stack
                 direction={"row"}
                 justifyContent={"space-between"}
@@ -47,6 +50,17 @@ const VehiculeZone = ({ id_mission }) => {
                     size='sm'
                     onClick={() => handleAdd()}
                 >Ajouter</Button>
+            </Stack>
+
+            <Stack
+                gap={2}
+                direction={"row"}
+                flexWrap={"wrap"}
+            >
+                <StatistiqueCard
+                    value={vehiculeListe.length}
+                    title={"Nombre de vihicules deployés"}
+                />
             </Stack>
 
             <Stack

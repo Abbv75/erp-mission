@@ -6,8 +6,9 @@ import UserCard from './UserCard'
 import { getAllMissionParticipant } from '../../../functions/getAllMissionParticipant'
 import { useParams } from 'react-router-dom'
 import AddUserForm from './AddUserForm'
+import StatistiqueCard from '../../../components/StatistiqueCard'
 
-const ParticipantZone = ({id_mission}) => {
+const ParticipantZone = ({ id_mission }) => {
     const [participantListe, setparticipantListe] = useState([]);
     const [isFormOpened, setisFormOpened] = useState(false);
 
@@ -48,6 +49,17 @@ const ParticipantZone = ({id_mission}) => {
                     size='sm'
                     onClick={() => handleAdd()}
                 >Ajouter</Button>
+            </Stack>
+
+            <Stack
+                gap={2}
+                direction={"row"}
+                flexWrap={"wrap"}
+            >
+                <StatistiqueCard
+                    value={participantListe.length}
+                    title={"Personnelles mobilisés"}
+                />
             </Stack>
 
             <Stack
