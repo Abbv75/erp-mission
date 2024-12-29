@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : dim. 29 déc. 2024 à 17:31
+-- Généré le : dim. 29 déc. 2024 à 17:47
 -- Version du serveur : 8.0.40-0ubuntu0.22.04.1
 -- Version de PHP : 8.1.31
 
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `demandeReparation` (
   `id_demandeReparation` int NOT NULL,
-  `statut` varchar(30) NOT NULL DEFAULT 'en cours',
+  `statut` varchar(30) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'en cours',
   `id_voiture` int NOT NULL,
   `date_reparation` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,7 @@ CREATE TABLE `mission` (
   `date_depart` date NOT NULL,
   `date_arrivee` date NOT NULL,
   `kilometrage` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `mission`
@@ -66,7 +66,7 @@ CREATE TABLE `missionParticipant` (
   `id_missionParticipant` int NOT NULL,
   `id_mission` int NOT NULL,
   `id_participant` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `missionParticipant`
@@ -87,7 +87,7 @@ CREATE TABLE `missionVehicule` (
   `idMissionVehicule` int NOT NULL,
   `id_mission` int NOT NULL,
   `id_vehicule` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `missionVehicule`
@@ -105,8 +105,8 @@ INSERT INTO `missionVehicule` (`idMissionVehicule`, `id_mission`, `id_vehicule`)
 
 CREATE TABLE `role` (
   `idRole` int NOT NULL,
-  `nomRole` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `nomRole` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `role`
@@ -125,13 +125,13 @@ INSERT INTO `role` (`idRole`, `nomRole`) VALUES
 
 CREATE TABLE `utilisateur` (
   `id_utilisateur` int NOT NULL,
-  `nom_utilisateur` varchar(30) NOT NULL,
-  `prenom_utilisateur` varchar(30) DEFAULT NULL,
-  `login` varchar(50) NOT NULL,
+  `nom_utilisateur` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `prenom_utilisateur` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `login` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `password` int NOT NULL,
   `id_role` int NOT NULL,
-  `telephone` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `telephone` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -153,11 +153,11 @@ INSERT INTO `utilisateur` (`id_utilisateur`, `nom_utilisateur`, `prenom_utilisat
 
 CREATE TABLE `vehicule` (
   `id_vehicule` int NOT NULL,
-  `matricule` varchar(10) NOT NULL,
+  `matricule` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
   `date_achat` date NOT NULL,
-  `type` varchar(30) NOT NULL,
-  `marque` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `type` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `marque` varchar(30) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `vehicule`
