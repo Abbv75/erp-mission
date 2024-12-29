@@ -1,15 +1,15 @@
 import axios from "axios";
 
-export const deleteDemandeReparation = async (id) => {
+export const validerDemandeReparation = async (id) => {
     try {
         await axios.postForm(
-            `${process.env.REACT_APP_API_URL}/deleteDemandeReparation.php`,
+            `${process.env.REACT_APP_API_URL}/validerDemandeReparation.php`,
             {
                 id: id
             }
         );
 
-        console.log('Demande supprimer====================================');
+        console.log('Vehicule valider====================================');
 
         return true;
     } catch (error) {

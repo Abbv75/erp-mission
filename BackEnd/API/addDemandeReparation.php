@@ -14,7 +14,7 @@ try {
 
     extract($_POST);
 
-    $query = $bdd->prepare('SELECT * FROM demandeReparation WHERE id_voiture=?');
+    $query = $bdd->prepare('SELECT * FROM demandeReparation WHERE id_voiture=? AND statut="en cours"');
     $query->execute([$id]);
 
     if ($query->fetch()) {

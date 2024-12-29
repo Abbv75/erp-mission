@@ -1,12 +1,14 @@
-import { faFeatherAlt, faPlus, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faFeatherAlt, faPlus, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Avatar, Button, Stack, Typography } from '@mui/joy'
+import { Avatar, Button, ButtonGroup, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
 import CustomTable from '../../components/CustomTable'
 import EditionForm from './EditionForm'
 import { toast } from 'react-toastify'
 import { getAllVehicule } from '../../functions/getAllVehicule'
 import { deleteVehicule } from '../../functions/deleteVehicule'
+import { validerDemandeReparation } from '../../functions/validerDemandeReparation'
+import { deleteDemandeReparation } from '../../functions/deleteDemandeReparation'
 
 const VoitureListe = () => {
     const [data, setdata] = useState([]);
@@ -55,6 +57,19 @@ const VoitureListe = () => {
         setisFormOpened(true);
     }
 
+    const handleValiderReparation = (id) => {
+        deleteDemandeReparation(id).then(
+            () => {
+                toast.success("La voiture a été mentionné comme reparée");
+                loadVehicule();
+            }
+        ).catch(
+            () => {
+                toast.error("Validation echouée");
+            }
+        )
+    }
+
     return (
         <Stack
             gap={2}
@@ -85,24 +100,40 @@ const VoitureListe = () => {
                     value?.date_achat,
                     value?.type,
                     value?.marque,
-                    <Stack
-                        direction={"row"}
-                        gap={1}
-                        sx={{ cursor: "pointer" }}
-                    >
-                        <FontAwesomeIcon
-                            icon={faFeatherAlt}
-                            color='green'
+                    <ButtonGroup>
+                        <Button
                             onClick={() => handleEdite(value)}
                             title='Modifier'
-                        />
-                        <FontAwesomeIcon
-                            icon={faTrashArrowUp}
-                            color='red'
+                            color='success'
+                        >
+                            <FontAwesomeIcon
+                                icon={faFeatherAlt}
+                            />
+                        </Button>
+
+                        <Button
                             onClick={() => handleDelete(value?.id_vehicule)}
+                            color='danger'
                             title='supprimer'
-                        />
-                    </Stack>
+                        >
+                            <FontAwesomeIcon
+                                icon={faTrashArrowUp}
+                            />
+                        </Button>
+                        {
+                            value.statut == 'en cours' && (
+                                <Button
+                                    endDecorator={
+                                        <FontAwesomeIcon icon={faCheckCircle} />
+                                    }
+                                    sx={{
+                                        textWrap: "nowrap"
+                                    }}
+                                    onClick={() => handleValiderReparation(value?.id_vehicule)}
+                                >Valider reparation</Button>
+                            )
+                        }
+                    </ButtonGroup>
                 ])}
             />
 

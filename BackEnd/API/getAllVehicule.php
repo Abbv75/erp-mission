@@ -10,6 +10,7 @@ try {
         FROM vehicule
         LEFT JOIN demandeReparation
         ON vehicule.id_vehicule = demandeReparation.id_voiture
+        ORDER BY id_vehicule DESC
     ');
 
     if (!$res = $query->fetchAll(PDO::FETCH_ASSOC)) {
