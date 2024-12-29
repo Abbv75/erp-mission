@@ -1,6 +1,6 @@
-import { faFeatherAlt, faPlus, faTrash, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faFeatherAlt, faPlus, faTrash, faTrashArrowUp, faUserAlt, faUserAstronaut, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Avatar, Button, Stack, Typography } from '@mui/joy'
+import { Avatar, Button, Card, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
 import CustomTable from '../../components/CustomTable'
 import { getAllUser } from '../../functions/getAllUser'
@@ -8,6 +8,7 @@ import EditionForm from './EditionForm'
 import { deleteUser } from '../../functions/deleteUser'
 import { toast } from 'react-toastify'
 import { getAllRole } from '../../functions/getAllRole'
+import StatistiqueCard from '../../components/StatistiqueCard'
 
 const UserListe = () => {
     const [data, setdata] = useState([]);
@@ -69,6 +70,35 @@ const UserListe = () => {
         <Stack
             gap={2}
         >
+            <Stack
+                gap={2}
+                direction={"row"}
+                flexWrap={"wrap"}
+            >
+                <StatistiqueCard
+                    title={"Nombre d'utilisateur"}
+                    value={data.length}
+                    icon={faUserGroup}
+                />
+
+                <StatistiqueCard
+                    title={"Nombre d'administrateur"}
+                    value={data.filter(value=>value.nomRole == "administrateur").length}
+                    icon={faUserAstronaut}
+                />
+                
+                <StatistiqueCard
+                    title={"Nombre de chauffeur"}
+                    value={data.filter(value=>value.nomRole == "chauffeur").length}
+                    icon={faUserAstronaut}
+                />
+                <StatistiqueCard
+                    title={"Nombre de gestionnaire"}
+                    value={data.filter(value=>value.nomRole == "gestionnaire").length}
+                    icon={faUserAstronaut}
+                />
+            </Stack>
+
             <Stack
                 direction={"row"}
                 justifyContent={"space-between"}
