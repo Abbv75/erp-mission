@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import MissionItem from './MissionItem'
 import { getAllMission } from '../../functions/getAllMission'
 import EditionForm from './EditionForm'
+import StatistiqueCard from '../../components/StatistiqueCard'
 
 const MissionListe = () => {
     const [data, setdata] = useState([]);
@@ -34,6 +35,17 @@ const MissionListe = () => {
         <Stack
             gap={2}
         >
+            <Stack
+                gap={2}
+                direction={"row"}
+                flexWrap={"wrap"}
+            >
+                <StatistiqueCard
+                    title={"Nombre total de mission"}
+                    value={data.length}
+                />
+            </Stack>
+
             <Stack
                 direction={"row"}
                 justifyContent={"space-between"}
