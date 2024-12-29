@@ -1,10 +1,15 @@
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faUserLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Card, Stack, Typography } from '@mui/joy'
 import { CardMedia } from '@mui/material'
 import React from 'react'
 
 const Header = ({ setisNavbarOpened }) => {
+    const handleDeconnexion = () => {
+        localStorage.removeItem("currentUser");
+        window.location.href = "/"
+    }
+
     return (
         <Card
             sx={{
@@ -32,7 +37,19 @@ const Header = ({ setisNavbarOpened }) => {
                         }}
                     />
                     <Typography color='primary' level='h3'>Groupe Sahel</Typography>
+
                 </Stack>
+
+                <Button
+                    color='danger'
+                    variant='outlined'
+                    endDecorator={
+                        <FontAwesomeIcon icon={faUserLock} />
+                    }
+                    onClick={() => handleDeconnexion()}
+                >
+                    Deconnexion
+                </Button>
             </Stack>
         </Card>
     )

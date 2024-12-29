@@ -5,6 +5,7 @@ import { faLock, faUserAstronaut } from '@fortawesome/free-solid-svg-icons'
 import { login as loginUser } from "../../functions/login"
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { CardMedia } from '@mui/material'
 
 const Connexion = ({ }) => {
     const [login, setlogin] = useState(null);
@@ -53,14 +54,17 @@ const Connexion = ({ }) => {
             >
                 <Card
                     sx={{
-                        alignItems: "center"
+                        alignItems: "center",
                     }}
                 >
-                    <Avatar
-                        size='lg'
-                    >
-                        <FontAwesomeIcon icon={faUserAstronaut} />
-                    </Avatar>
+                    <CardMedia
+                        component={"img"}
+                        src={require("../../assets/logo.png")}
+                        sx={{
+                            width: 100
+                        }}
+                    />
+
                     <Typography level='h3'>Connexion</Typography>
                     <Input
                         placeholder='Login'

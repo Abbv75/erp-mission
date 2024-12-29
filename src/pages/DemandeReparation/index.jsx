@@ -1,4 +1,4 @@
-import { Button, Stack } from '@mui/joy';
+import { Button, Stack, Typography } from '@mui/joy';
 import React, { useCallback, useEffect, useState } from 'react';
 import VoitureCard from '../../components/VoitureCard';
 import { getAllVehicule } from '../../functions/getAllVehicule';
@@ -59,43 +59,50 @@ const DemandeReparation = () => {
     return (
         <Stack
             gap={2}
-            direction={"row"}
-            flexWrap={"wrap"}
         >
-            {
-                voitureListe.map(value => (
-                    <VoitureCard
-                        data={value}
-                        button={(
-                            <Button
-                                endDecorator={
-                                    <FontAwesomeIcon icon={
+            <Typography level="h4">Gerez les demandes de réparation des véhicules a ce niveau</Typography>
+
+            <Stack
+                gap={2}
+                direction={"row"}
+                flexWrap={"wrap"}
+            >
+                {
+                    voitureListe.map(value => (
+                        <VoitureCard
+                            data={value}
+                            button={(
+                                <Button
+                                    endDecorator={
+                                        <FontAwesomeIcon icon={
+                                            value.statut == "en cours"
+                                                ? faTimesCircle
+                                                : faGears
+                                        } />
+                                    }
+                                    color={
                                         value.statut == "en cours"
-                                            ? faTimesCircle
-                                            : faGears
-                                    } />
-                                }
-                                color={
-                                    value.statut == "en cours"
-                                        ? "danger"
-                                        : "primary"
-                                }
-                                onClick={() => {
-                                    value.statut == "en cours"
-                                        ? handleDeleteDemande(value.id_vehicule)
-                                        : addDemande(value.id_vehicule)
-                                }}
-                            >
-                                {
-                                    value.statut == "en cours"
-                                        ? "Annuler la demande"
-                                        : "Demande une de reparation"
-                                }
-                            </Button>
-                        )}
-                    />
-                ))
-            }
+                                            ? "danger"
+                                            : "primary"
+                                    }
+                                    onClick={() => {
+                                        value.statut == "en cours"
+                                            ? handleDeleteDemande(value.id_vehicule)
+                                            : addDemande(value.id_vehicule)
+                                    }}
+                                >
+                                    {
+                                        value.statut == "en cours"
+                                            ? "Annuler la demande"
+                                            : "Demande une de reparation"
+                                    }
+                                </Button>
+                            )}
+                        />
+                    ))
+                }
+            </Stack>
+
         </Stack>
     )
 }

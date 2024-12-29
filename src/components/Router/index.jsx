@@ -18,7 +18,13 @@ const Router = () => {
                 path='/*'
                 element={
                     !!currentUser
-                        ? <UserListe />
+                        ? (
+                            currentUser.nomRole == 'administrateur'
+                                ? <UserListe />
+                                : currentUser.nomRole == 'chauffeur'
+                                    ? <DemandeReparation />
+                                    : <MissionListe />
+                        )
                         : <Connexion setcurrentUser={setcurrentUser} />
                 }
             />

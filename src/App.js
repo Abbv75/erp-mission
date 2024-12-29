@@ -17,12 +17,14 @@ function App() {
   return (
     <BrowserRouter>
 
+      {!!localStorage.getItem("currentUser") && (
+        <Header
+          setisNavbarOpened={setisNavbarOpened}
+        />
+      )}
+      
       <Navbar
         isNavbarOpened={isNavbarOpened}
-        setisNavbarOpened={setisNavbarOpened}
-      />
-
-      <Header
         setisNavbarOpened={setisNavbarOpened}
       />
 
