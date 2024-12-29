@@ -19,7 +19,7 @@ const Router = () => {
                 path='/*'
                 element={
                     !!currentUser
-                        ? <Route path='/*' element={<Menu />} />
+                        ? <Menu/>
                         : <Connexion setcurrentUser={setcurrentUser} />
                 }
             />
