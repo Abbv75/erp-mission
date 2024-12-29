@@ -81,7 +81,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
                     date_achat: currentValue.date_achat,
                     type: currentValue?.type,
                     marque: currentValue.marque,
-                    id_voiture: currentValue.id_voiture,
+                    id_voiture: currentValue.id_vehicule,
                 })
             }
             else {
@@ -93,6 +93,9 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
                     marque: "Toyota",
                 })
             }
+
+            console.log(currentValue);
+            
         },
         [currentValue]
     )
@@ -116,7 +119,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
                 onSubmit={haandleSubmit}
             >
                 <Card>
-                    <Typography>{data.id_vehicule ? 'Modifier' : "Ajouter"} de voiture de service</Typography>
+                    <Typography>{data.id_voiture ? 'Modifier' : "Ajouter"} de voiture de service</Typography>
 
                     <FormControl>
                         <FormLabel>Matricule</FormLabel>
@@ -131,7 +134,7 @@ const EditionForm = ({ isFormOpened = false, setisFormOpened, loadVehicule, curr
                     </FormControl>
 
                     <FormControl>
-                        <FormLabel>Numero</FormLabel>
+                        <FormLabel>Date d'achat</FormLabel>
                         <Input
                             placeholder="Selectionnez la date d'achat"
                             value={data.date_achat}

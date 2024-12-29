@@ -94,7 +94,7 @@ const DemandeReparation = () => {
                                     {
                                         value.statut == "en cours"
                                             ? "Annuler la demande"
-                                            : "Demande une de reparation"
+                                            : "Demander une reparation"
                                     }
                                 </Button>
                             )}

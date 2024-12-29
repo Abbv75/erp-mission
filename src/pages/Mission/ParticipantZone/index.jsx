@@ -36,7 +36,7 @@ const ParticipantZone = ({id_mission}) => {
                 direction={"row"}
                 justifyContent={"space-between"}
             >
-                <Typography level="h4">Liste des missions</Typography>
+                <Typography level="h4">Liste des personnelles</Typography>
                 <Button
                     endDecorator={
                         <Avatar

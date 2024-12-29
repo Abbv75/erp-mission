@@ -21,7 +21,7 @@ const Connexion = ({ }) => {
                 toast.success("Connexion reussit avec success");
                 setTimeout(() => {
                     // navigate("user-liste");
-                    window.location.href = "/user-liste";
+                    window.location.href = "/";
                 }, 3000);
             }
             else {
