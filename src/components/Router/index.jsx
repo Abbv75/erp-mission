@@ -15,20 +15,14 @@ const Router = () => {
 
     return (
         <Routes>
-            {/* <Route
+            <Route
                 path='/*'
                 element={
                     !!currentUser
-                        ? (
-                            currentUser.nomRole == 'administrateur'
-                                ? <UserListe />
-                                : currentUser.nomRole == 'chauffeur'
-                                    ? <DemandeReparation />
-                                    : <MissionListe />
-                        )
+                        ? <Route path='/*' element={<Menu />} />
                         : <Connexion setcurrentUser={setcurrentUser} />
                 }
-            /> */}
+            />
 
             <Route path='/*' element={<Menu />} />
 
