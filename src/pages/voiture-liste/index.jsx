@@ -1,4 +1,4 @@
-import { faCheckCircle, faFeatherAlt, faPlus, faTrashArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faCarCrash, faCheckCircle, faFeatherAlt, faPlus, faTrashArrowUp, faTruck, faTruckFast, faTruckMoving } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Button, ButtonGroup, Stack, Typography } from '@mui/joy'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -9,6 +9,7 @@ import { getAllVehicule } from '../../functions/getAllVehicule'
 import { deleteVehicule } from '../../functions/deleteVehicule'
 import { validerDemandeReparation } from '../../functions/validerDemandeReparation'
 import { deleteDemandeReparation } from '../../functions/deleteDemandeReparation'
+import StatistiqueCard from '../../components/StatistiqueCard'
 
 const VoitureListe = () => {
     const [data, setdata] = useState([]);
@@ -74,6 +75,30 @@ const VoitureListe = () => {
         <Stack
             gap={2}
         >
+            <Stack
+                gap={2}
+                direction={"row"}
+                flexWrap={"wrap"}
+            >
+                <StatistiqueCard
+                    title={"Nombre de voiture"}
+                    icon={faTruck}
+                    value={data.length}
+                />
+
+                <StatistiqueCard
+                    title={"Nombre de voiture en bon état"}
+                    icon={faTruckFast}
+                    value={data.filter(value => value.statut != "en cours").length}
+                />
+
+                <StatistiqueCard
+                    title={"Nombre de voiture à réparé"}
+                    icon={faCarCrash}
+                    value={data.filter(value => value.statut == "en cours").length}
+                />
+            </Stack>
+
             <Stack
                 direction={"row"}
                 justifyContent={"space-between"}
