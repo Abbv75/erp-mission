@@ -5,6 +5,7 @@ import UserListe from '../../pages/User-liste'
 import VoitureListe from '../../pages/voiture-liste'
 import MissionListe from '../../pages/Mission-liste'
 import Mission from '../../pages/Mission'
+import DemandeReparation from '../../pages/DemandeReparation'
 
 const Router = () => {
     const [currentUser, setcurrentUser] = useState(
@@ -31,6 +32,7 @@ const Router = () => {
                         <Route path='/mission-liste/*' element={<MissionListe />} />
                         <Route path='/mission/:id_mission' element={<Mission />} />
                         <Route path='/mission/*' element={<MissionListe />} />
+                        <Route path='/demande-reparation/*' element={<DemandeReparation />} />
                     </>
                 )
             }

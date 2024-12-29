@@ -5,7 +5,7 @@ import React from 'react'
 import { toast } from 'react-toastify'
 import { deleteMissionVehicule } from '../../functions/deleteMissionVehicule'
 
-const VoitureCard = ({ data, loadVehicule, id_mission }) => {
+const VoitureCard = ({ data, loadVehicule, id_mission, button }) => {
 
     const handleDelete = () => {
         if (
@@ -51,12 +51,17 @@ const VoitureCard = ({ data, loadVehicule, id_mission }) => {
                 <Typography>{data.type}</Typography>
             </Stack>
 
-            <Button
-                endDecorator={
-                    <FontAwesomeIcon icon={faTimesCircle} />
-                }
-                onClick={() => handleDelete()}
-            >Supprimer de la liste</Button>
+            {
+                button || (
+                    <Button
+                        endDecorator={
+                            <FontAwesomeIcon icon={faTimesCircle} />
+                        }
+                        onClick={() => handleDelete()}
+                    >Supprimer de la liste</Button>
+                )
+            }
+
         </Card>
     )
 }
